@@ -1,22 +1,46 @@
-To run the server follow the steps described in the README.md file in the Backend directory.
-To start the WebApp navigate to the dashboard_planning directory and run:
-ng serve
-If you get the error: Watchpack Error (watcher): Error: ENOSPC: System limit for number of file watchers reached, run:
-ng serve --watch --live-reload --poll 2000
+# VitTrack Frontend
 
-If you do not have npm and node installed, I recommend the following steps:
+This is the README file for the Frontend of **VitTrack** project (Engineering Project at THWS). This file provides instructions on how to set up and run the web application.
 
-install nvm
-run: nvm install node
+## Backend Setup
 
-run: npm install -g npx
+To run the backend, refer to the `README.md` file in the Backend directory for detailed instructions on setting up the server.
 
-run: npm install -g @angular/cli
+## WebApp Setup
 
+To start the web application, perform the following steps:
 
-If you do not have TypeScript installed, run: npm install -g typescript.
-If you run into problems, try the following:
+1. Navigate to the `dashboard_planning` directory.
+2. Run the command `ng serve` to start the application.
 
-Delete the node_modules folder and package-lock.json file and run npm install
+### Troubleshooting
 
-You might have to use a different npm version. That's what nvm is good for. By running nvm ls you can see all installed versions. By running nvm use version-number you can choose the version you want to use. By running nvm install version-number you can install the version. I currently use version 18.10.0. After doing that try 1).
+If you encounter the following error: "Watchpack Error (watcher): Error: ENOSPC: System limit for the number of file watchers reached," try running the following command instead:
+`ng serve --watch --live-reload --poll 2000`
+
+## Prerequisites
+
+Before running the server and web application, ensure that you have the following prerequisites installed:
+
+- **Node.js** and **npm**: If you do not have them installed, follow the steps below:
+
+    - Install **nvm** (Node Version Manager) by referring to the official documentation.
+    - Run the command `nvm install node` to install Node.js.
+    - Run the command `npm install -g npx` to install the NPX package runner.
+    - Run the command `npm install -g @angular/cli` to install the Angular CLI globally.
+
+- **TypeScript**: If TypeScript is not installed, run the command `npm install -g typescript`.
+
+## Troubleshooting
+
+If you encounter any issues during the setup or running of the server and web application, try the following steps:
+
+1. Delete the `node_modules` folder and `package-lock.json` file.
+2. Run the command `npm install` to reinstall the dependencies.
+
+If the problem persists, you may need to switch to a different version of npm using nvm. Follow these steps:
+
+1. Run `nvm ls` to view all installed versions of npm.
+2. Select the desired version using `nvm use version-number`.
+3. If the version you want is not installed, run `nvm install version-number` to install it. (e.g., `nvm install 18.10.0`)
+4. After switching the npm version, retry the setup steps mentioned above (1 and 2).
