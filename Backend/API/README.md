@@ -19,7 +19,7 @@ The API will start running on url=http://localhost:8000/. You can now send reque
 To configure the hardware, you need to update the constants defined in the constants.py file located in the `backend/api/utilities` directory.
 Specifically, you can change the following constants to match your hardware configuration:
 
-- SERIAL_PORT: The serial port used to communicate with the hardware. You can set this to the appropriate port name for your device (e.g. "/dev/ttyUSB0" on Linux or "COM3" on Windows).
-- BAUD_RATE: The baud rate used for serial communication. This should match the baud rate configured on your hardware.
-- START_COMMAND: The command to send to the hardware to start data acquisition. This should be a string that the hardware can recognize as a start command.
-- STOP_COMMAND: The command to send to the hardware to stop data acquisition. This should be a string that the hardware can recognize as a stop command.
+- `SERIAL_PORT`: The serial port used to communicate with the hardware. You can set this to the appropriate port name for your device (e.g. "/dev/ttyUSB0" on Linux or "COM3" on Windows).
+- `BAUD_RATE`: The baud rate used for serial communication. This should match the baud rate configured on your hardware.
+- `START_COMMAND`: The command to send to the hardware to start data acquisition. This should be a string that the hardware can recognize as a start command.
+- `STOP_COMMAND`: The command to send to the hardware to stop data acquisition. This should be a string that the hardware can recognize as a stop command.
