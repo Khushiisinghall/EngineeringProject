@@ -15,3 +15,11 @@ To run the backend API, you need to have the following software installed on you
 - Install the required packages:`pip install -r requirements.txt`
 - Start the API server by running the api.py script:`uvicorn api:app --reload`
 The API will start running on url=http://localhost:8000/. You can now send requests to the API to control the hardware and receive real-time data.(url/start/userid,url/stop/userid,url/stream/userid,)
+## Configure
+To configure the hardware, you need to update the constants defined in the constants.py file located in the `backend/api/utilities` directory.
+Specifically, you can change the following constants to match your hardware configuration:
+
+- SERIAL_PORT: The serial port used to communicate with the hardware. You can set this to the appropriate port name for your device (e.g. "/dev/ttyUSB0" on Linux or "COM3" on Windows).
+- BAUD_RATE: The baud rate used for serial communication. This should match the baud rate configured on your hardware.
+- START_COMMAND: The command to send to the hardware to start data acquisition. This should be a string that the hardware can recognize as a start command.
+- STOP_COMMAND: The command to send to the hardware to stop data acquisition. This should be a string that the hardware can recognize as a stop command.
