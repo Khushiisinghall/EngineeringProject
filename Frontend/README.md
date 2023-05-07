@@ -1,4 +1,4 @@
-# VitTrack Frontend
+# VitTrack Frontend README
 
 This is the README file for the Frontend of **VitTrack** project (Engineering Project at THWS). This file provides instructions on how to set up and run the web application.
 
