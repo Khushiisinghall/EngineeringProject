@@ -17,9 +17,11 @@ chunk_size=10
 left_hand_data_length=21
 other_data_length=18
 brain_sensor_length=19
-#serial connection 
-port_name="COM8"  #"/dev/ttyACM0" for linux
-baudrate=9600
+########################################### Serial connection and comand for harware ##################################
+SERIAL_PORT="COM8"  #"/dev/ttyACM0" for linux
+BAUD_RATE=9600
+START_COMMAND="s"
+STOP_COMMAND="q"
 # EEG
 MUSE_NB_EEG_CHANNELS = 5
 MUSE_SAMPLING_EEG_RATE = 256

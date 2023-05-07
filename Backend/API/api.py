@@ -7,13 +7,11 @@ import threading
 
 global stop_event
 stop_event=threading.Event()
-ser=serial_connection(port_name=port_name,baudrate=9600)
+ser=serial_connection(port_name=SERIAL_PORT,baudrate=BAUD_RATE)
 
 def start_sender(userID=1):
-
     #start borad connection and process
-    command="s"
-    ser.write(command.encode())
+    ser.write(START_COMMAND.encode())
     while not stop_event.is_set():
         # receive data from serial port and log it
         sensor_data = ser.readline().decode()
@@ -38,8 +36,7 @@ async def start(user_id: int):
 
 @app.get("/stop/{user_id}")
 async def stop(user_id: int):
-    command="q"
-    command_sender(ser=ser,cmd=command)
+    command_sender(ser=ser,cmd=STOP_COMMAND)
     stop_data_sender_thread()
     return   f"Stopping data sender thread for user {user_id}"
 
