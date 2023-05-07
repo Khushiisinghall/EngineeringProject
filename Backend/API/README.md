@@ -14,5 +14,4 @@ To run the backend API, you need to have the following software installed on you
 -- Linux:`source env/bin/activate`
 - Install the required packages:`pip install -r requirements.txt`
 - Start the API server by running the api.py script:`uvicorn api:app --reload`
-- 
 The API will start running on url=http://localhost:8000/. You can now send requests to the API to control the hardware and receive real-time data.(url/start/userid,url/stop/userid,url/stream/userid,)
