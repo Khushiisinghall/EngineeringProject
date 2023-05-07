@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "angular-new-router": "github:angular/router"
+  }
+}
