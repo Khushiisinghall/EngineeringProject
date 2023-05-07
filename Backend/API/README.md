@@ -5,7 +5,7 @@ This repository contains code for a backend API that sends commands to hardware 
 To run the backend API, you need to have the following software installed on your machine:
 - Python 3.10 or higher
 - Pip package manager
-## Installation
+## Installation and Run 
 - Clone this repository to your local machine
 - Navigate to the `backend` folder: `cd backend`
 - Create a Python virtual environment for the project:`python -m venv env`
