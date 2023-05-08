@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {Observable, Subject} from 'rxjs' 
-import { MarketPrice } from '../market-price';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +7,6 @@ import { MarketPrice } from '../market-price';
 export class LiveService {
   private displayGraph: number = 1;
   private showAddTask: boolean = false;
-  private marketStatusToPlot: MarketPrice[];
   private graphSubject = new Subject<any>();
   private titleSubject = new Subject<any>();
   private curTitle: string = "Brain wave sensor";
@@ -207,9 +205,6 @@ export class LiveService {
     return this.subject.asObservable();
   }
 
-  setMarketStatusToPlot(market: MarketPrice[]) {
-    this.marketStatusToPlot = market;
-  }
 
   setStartTime(startTime: Date) {
     this.startTime = startTime;
@@ -227,7 +222,4 @@ export class LiveService {
     return this.endTime;
   }
 
-  getMarketStatusToPlot() {
-    return this.marketStatusToPlot;
-  }
 }

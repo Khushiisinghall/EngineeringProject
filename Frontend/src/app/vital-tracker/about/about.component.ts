@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LiveService } from 'src/app/services/live.service';
+import { LiveService } from '../services/liveservice/live.service';
 
 @Component({
   selector: 'app-about',
@@ -8,9 +8,9 @@ import { LiveService } from 'src/app/services/live.service';
 })
 export class AboutComponent {
 
-  constructor (private uiService:LiveService) {}
+  constructor (private liveService:LiveService) {}
 
   changeDisplayGraph(i: number) {
-    this.uiService.changeDisplayGraph(i);
+    this.liveService.changeDisplayGraph(i);
   }
 }

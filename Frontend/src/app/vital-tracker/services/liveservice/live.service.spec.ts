@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { LiveService } from './live.service';
 
 describe('UiService', () => {

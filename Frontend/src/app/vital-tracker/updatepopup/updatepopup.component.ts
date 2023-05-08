@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms'
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from '../service/auth.service';
+import { AuthService } from '../services/authservice/auth.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -11,7 +11,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class UpdatepopupComponent implements OnInit {
 
-  constructor(private builder: FormBuilder, private service: AuthService, private toastr: ToastrService,
+  constructor(private builder: FormBuilder, private service: AuthService, @Inject(ToastrService) private toastr: ToastrService,
     private dialogref: MatDialogRef<UpdatepopupComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {  
 
   }

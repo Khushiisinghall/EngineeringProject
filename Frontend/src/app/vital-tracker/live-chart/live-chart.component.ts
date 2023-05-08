@@ -7,13 +7,13 @@ import { Router } from 'express';
 import { HeartSkinRateData } from 'HeartSkinRateData';
 import { IMUSensorData } from 'IMUSensorData';
 import { Observable, Subscription } from 'rxjs';
-import { DataService } from 'src/app/services/data.service';
-import { LiveService } from 'src/app/services/live.service';
+import { DataService } from 'src/app/vital-tracker/services/dataservice/data.service';
 import { interval, throwError } from 'rxjs';
 import { catchError, retry, delay } from 'rxjs/operators'
 import { tap, retryWhen, delayWhen } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { timer, of } from 'rxjs';
+import { LiveService } from '../services/liveservice/live.service';
 
 @Component({
   selector: 'app-live-chart',

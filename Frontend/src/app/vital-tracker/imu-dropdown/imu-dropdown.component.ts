@@ -1,6 +1,6 @@
 import { Component, Inject, Input } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
-import { LiveService } from 'src/app/services/live.service';
+import { LiveService } from '../services/liveservice/live.service';
 
 @Component({
   selector: 'app-imu-dropdown',

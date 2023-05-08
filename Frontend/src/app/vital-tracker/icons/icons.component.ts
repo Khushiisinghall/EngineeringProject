@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { LiveService } from 'src/app/services/live.service';
+import { LiveService } from '../services/liveservice/live.service';
 
 @Component({
   selector: 'app-icons',

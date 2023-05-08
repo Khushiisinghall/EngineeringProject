@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import * as d3 from 'd3';
 import { Subscription } from 'rxjs';
-import { LiveService } from 'src/app/services/live.service';
-import { DataService } from 'src/app/services/data.service';
+import { DataService } from 'src/app/vital-tracker/services/dataservice/data.service';
 import { HeartSkinRateData } from 'HeartSkinRateData';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BrainSensorData } from 'BrainSensorData';
 import { IMUSensorData } from 'IMUSensorData';
+import { LiveService } from '../services/liveservice/live.service';
 
 @Component({
   selector: 'app-historical-chart',
