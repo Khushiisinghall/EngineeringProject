@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>Update User</h1>
+<form [formGroup]="registerform" (ngSubmit)="UpdateUser()">
+    <div mat-dialog-content>
+        <a>Please choose the user role</a>
+        <div>
+            <mat-radio-group formControlName="role" aria-label="Select an option">
+                <mat-radio-button value="Technician">Technician</mat-radio-button>
+                <mat-radio-button value="Engineer">Engineer</mat-radio-button>
+            </mat-radio-group>
+        </div>
+        
+        <div>
+            <mat-form-field class="example-full-width">
+                <mat-label>Enter UserID</mat-label>
+                <input matInput formControlName="userid" >
+              </mat-form-field>
+        </div>
+        
+        <div>
+            <section class="example-section">
+                <mat-checkbox  formControlName="isactive" class="example-margin">Active</mat-checkbox>
+            </section>
+        </div>
+        
+
+    </div>
+    <div mat-dialog-actions>
+        <button type="submit" mat-raised-button color="primary" cdkFocusInitial>Save</button>
+        <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+    </div>
+</form>

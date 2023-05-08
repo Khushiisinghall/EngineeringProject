@@ -52,6 +52,15 @@ import { MatInputModule } from '@angular/material/input';
 import { ImuDropdownComponent } from './vital-tracker/imu-dropdown/imu-dropdown.component';
 import { MuseDropdownComponent } from './vital-tracker/muse-dropdown/muse-dropdown.component';
 
+//login page modules
+import { RegisterComponent } from './vital-tracker/register/register.component';
+import { LoginComponent } from './vital-tracker/login/login.component';
+import { UserComponent } from './vital-tracker/user/user.component';
+import {MaterialModule} from 'src/material.module';
+//install ngx: npm i ngx-toastr
+import { ToastrModule } from 'ngx-toastr';
+import { UpdatepopupComponent } from './vital-tracker/updatepopup/updatepopup.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,7 +85,12 @@ import { MuseDropdownComponent } from './vital-tracker/muse-dropdown/muse-dropdo
     DateTimePickerButtonComponent,
     DateTimePickerDialogComponent,
     ImuDropdownComponent,
-    MuseDropdownComponent
+    MuseDropdownComponent,
+    //login page modules
+    RegisterComponent,
+    LoginComponent,
+    UserComponent,
+    UpdatepopupComponent
   ],
   imports: [
     BrowserModule,
@@ -106,7 +120,13 @@ import { MuseDropdownComponent } from './vital-tracker/muse-dropdown/muse-dropdo
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule, 
-    
+    //login page modules
+    BrowserModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    MaterialModule,
+    HttpClientModule,
+    ToastrModule.forRoot()
   ],
   providers: [Assembly_order, Skill_matrix_human, Skill_matrix_robot, Criteria_Catalogue, MTM_Human, ASP, MatDatetimepickerModule,
   ],

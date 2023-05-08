@@ -1,0 +1,45 @@
+<mat-card>
+    <mat-card-header>
+        <h2>Registeration</h2>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="example-form" [formGroup]="registerform" (ngSubmit)="proceedregister()">
+          <div>
+            <mat-form-field class="example-full-width">
+              <mat-label>Username</mat-label>
+              <input matInput formControlName="id" >
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="example-full-width">
+              <mat-label>Name</mat-label>
+              <input matInput formControlName="name" >
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="example-full-width">
+              <mat-label>Password</mat-label>
+              <input type="password" matInput formControlName="password" >
+            </mat-form-field>
+          </div>  
+          <div>
+            <mat-form-field class="example-full-width">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" >
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-radio-group formControlName="gender" aria-label="Select an option">
+              <mat-radio-button value="male">Male</mat-radio-button>
+              <mat-radio-button value="female">Female</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div>
+              <button mat-raised-button color="primary">Submit</button>
+              <a [routerLink]="['/vit-track', 'login']" mat-raised-button color="accent">Back to Login</a>
+          </div>
+          </form>
+    </mat-card-content>
+  </mat-card>
+
+
