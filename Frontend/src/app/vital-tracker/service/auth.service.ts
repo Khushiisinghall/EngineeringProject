@@ -14,16 +14,16 @@ export class AuthService {
   hardwareapiurl='';
 
   RegisterUser(inputdata:any){
-    return this.http.post(this.apiurl,inputdata)
+    return this.http.post(this.mongourl,inputdata)
   }
   GetUserbyCode(id:any){
-    return this.http.get(this.apiurl+'/'+id);
+    return this.http.get(this.mongourl+'/'+id);
   }
   Getall(){
-    return this.http.get(this.apiurl);
+    return this.http.get(this.mongourl);
   }
   updateuser(id:any,inputdata:any){
-    return this.http.put(this.apiurl+'/'+id,inputdata);
+    return this.http.put(this.mongourl+'/'+id,inputdata);
   }
   CallHardware(userid:any){
      return this.http.post(this.hardwareapiurl,userid);
