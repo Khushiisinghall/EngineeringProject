@@ -30,7 +30,7 @@ export class LiveChartComponent {
 
 
   private svgElement: HTMLElement;
-  private minutesToShow = 3;
+  private minutesToShow = 0.1;
   private chartProps: any;
   curColor: string;
   @Output() curIcon: number = 1;
@@ -378,7 +378,7 @@ export class LiveChartComponent {
   
     let _this = this;
 
-    let colors = ['blue','green', 'pink'];
+    let colors = ['blue','green', 'black'];
     var valueLines: any[] = [];
     for (let i = 0; i < this.imuAxes.length; ++i) {
       var coordinate = this.imuAxes[i];
@@ -1404,7 +1404,7 @@ export class LiveChartComponent {
     let _this = this;
     var chartProps = this.chartProps[i];
     let graphNumber = this.imuData[i];
-    let colors = ['blue','green', 'pink'];
+    let colors = ['blue','green', 'black'];
     let color = colors[graphNumber-1];
     // Scale the range of the data again
     chartProps.x.domain(
