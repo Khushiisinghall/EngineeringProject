@@ -555,8 +555,8 @@ export class HistoricalChartComponent {
         switch(graphNumber) {
           case 1: 
             var text = [`<span style="color:${colors[0]};"> X: <span style="color:black;"> ` + d.acceleration[0] + "<br>",
-                        `<span style="color:${colors[1]};"> Y: <span style="color:black;"> ` + d.acceleration[0] + "<br>",
-                        `<span style="color:${colors[2]};"> Z: <span style="color:black;"> ` + d.acceleration[0] + "<br>"
+                        `<span style="color:${colors[1]};"> Y: <span style="color:black;"> ` + d.acceleration[1] + "<br>",
+                        `<span style="color:${colors[2]};"> Z: <span style="color:black;"> ` + d.acceleration[2] + "<br>"
                        ]
 
             tooltip.html(_this.imuAxes.reduce((result, coordinate) => result + text[coordinate-1], '')+ "Time: " + d3.timeFormat('%H:%M:%S')(d.date))
@@ -579,8 +579,8 @@ export class HistoricalChartComponent {
             break;
           case 2: 
             var text = [`<span style="color:${colors[0]};"> X: <span style="color:black;"> ` + d.orientation[0] + "<br>",
-                        `<span style="color:${colors[1]};"> Y: <span style="color:black;"> ` + d.orientation[0] + "<br>",
-                        `<span style="color:${colors[2]};"> Z: <span style="color:black;"> ` + d.orientation[0] + "<br>"
+                        `<span style="color:${colors[1]};"> Y: <span style="color:black;"> ` + d.orientation[1] + "<br>",
+                        `<span style="color:${colors[2]};"> Z: <span style="color:black;"> ` + d.orientation[2] + "<br>"
                        ]
             tooltip.html(_this.imuAxes.reduce((result, coordinate) => result + text[coordinate-1], '')+ "Time: " + d3.timeFormat('%H:%M:%S')(d.date))
             .style('left', (event.pageX-275) + 'px')
@@ -597,8 +597,8 @@ export class HistoricalChartComponent {
             break;
           case 3: 
             var text = [`<span style="color:${colors[0]};"> X: <span style="color:black;"> ` + d.magnetic[0] + "<br>",
-                        `<span style="color:${colors[1]};"> Y: <span style="color:black;"> ` + d.magnetic[0] + "<br>",
-                        `<span style="color:${colors[2]};"> Z: <span style="color:black;"> ` + d.magnetic[0] + "<br>"
+                        `<span style="color:${colors[1]};"> Y: <span style="color:black;"> ` + d.magnetic[1] + "<br>",
+                        `<span style="color:${colors[2]};"> Z: <span style="color:black;"> ` + d.magnetic[2] + "<br>"
                       ]
             tooltip.html(_this.imuAxes.reduce((result, coordinate) => result + text[coordinate-1], '')+ "Time: " + d3.timeFormat('%H:%M:%S')(d.date))
             .style('left', (event.pageX-275) + 'px')
@@ -615,8 +615,8 @@ export class HistoricalChartComponent {
             break;
           case 4:
             var text = [`<span style="color:${colors[0]};"> X: <span style="color:black;"> ` + d.gyro[0] + "<br>",
-                        `<span style="color:${colors[1]};"> Y: <span style="color:black;"> ` + d.gyro[0] + "<br>",
-                        `<span style="color:${colors[2]};"> Z: <span style="color:black;"> ` + d.gyro[0] + "<br>"
+                        `<span style="color:${colors[1]};"> Y: <span style="color:black;"> ` + d.gyro[1] + "<br>",
+                        `<span style="color:${colors[2]};"> Z: <span style="color:black;"> ` + d.gyro[2] + "<br>"
                        ]
             tooltip.html(_this.imuAxes.reduce((result, coordinate) => result + text[coordinate-1], '')+ "Time: " + d3.timeFormat('%H:%M:%S')(d.date))
             .style('left', (event.pageX-275) + 'px')
@@ -633,8 +633,8 @@ export class HistoricalChartComponent {
             break;
           case 5:
             var text = [`<span style="color:${colors[0]};"> X: <span style="color:black;"> ` + d.linear[0] + "<br>",
-                        `<span style="color:${colors[1]};"> Y: <span style="color:black;"> ` + d.linear[0] + "<br>",
-                        `<span style="color:${colors[2]};"> Z: <span style="color:black;"> ` + d.linear[0] + "<br>"
+                        `<span style="color:${colors[1]};"> Y: <span style="color:black;"> ` + d.linear[1] + "<br>",
+                        `<span style="color:${colors[2]};"> Z: <span style="color:black;"> ` + d.linear[2] + "<br>"
                        ]
             tooltip.html(_this.imuAxes.reduce((result, coordinate) => result + text[coordinate-1], '')+ "Time: " + d3.timeFormat('%H:%M:%S')(d.date))
             .style('left', (event.pageX-275) + 'px')
@@ -651,8 +651,8 @@ export class HistoricalChartComponent {
             break;
           case 6:
             var text = [`<span style="color:${colors[0]};"> X: <span style="color:black;"> ` + d.gravity[0] + "<br>",
-                        `<span style="color:${colors[1]};"> Y: <span style="color:black;"> ` + d.gravity[0] + "<br>",
-                        `<span style="color:${colors[2]};"> Z: <span style="color:black;"> ` + d.gravity[0] + "<br>"
+                        `<span style="color:${colors[1]};"> Y: <span style="color:black;"> ` + d.gravity[1] + "<br>",
+                        `<span style="color:${colors[2]};"> Z: <span style="color:black;"> ` + d.gravity[2] + "<br>"
                        ]
             tooltip.html(_this.imuAxes.reduce((result, coordinate) => result + text[coordinate-1], '')+ "Time: " + d3.timeFormat('%H:%M:%S')(d.date))
             .style('left', (event.pageX-275) + 'px')
