@@ -9,7 +9,7 @@ from src.utilities.constants import left_hand_data_length
 
 def skin_rate_reader(data, userID):
     date = datetime.now()
-    if len(data) == left_hand_data_length:
+    if len(data) >20:
         skin_rate = data[19] # extract heart rate value and convert to integer
         skin_pack = {"userID": userID, "rate": skin_rate, "date": date}
         return skin_pack

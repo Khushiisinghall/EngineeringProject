@@ -16,7 +16,7 @@ def imu_sensor_reader(data,userID):
         gyro=         [data[3],data[9],data[15]]
         magnetic=     [data[4],data[10],data[16]]
         linear=       [data[5],data[11],data[17]]
-        gravity=      [data[6],data[12],data[18]]
+        gravity=      [data[6],data[12],data[18][:-3]]
         imu_pack={"userID":userID,"sensorID":sensorID,"acceleration":acceleration,
                 "orientation":orientation,"gyro":gyro,"magnetic":magnetic,
                 "linear":linear,"gravity":gravity,"date":date}

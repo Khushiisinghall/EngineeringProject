@@ -40,9 +40,9 @@ def run():
         global command, stop_event
         # create an event object to signal the thread to stop
         stop_event = threading.Event()
-        command="s"
+        command="1"
         # data_logger.commander(ser,command)
-        if len(userID)>0 and command=="s" and (mode_status=="batch" or mode_status=="real-time"):
+        if len(userID)>0 and command=="1" and (mode_status=="batch" or mode_status=="real-time"):
             start_button.config(bg="green")
             canvas.itemconfig(circle, fill="green")
             stop_button.config(bg="white")
@@ -54,7 +54,7 @@ def run():
         start_button.config(bg="white")
         stop_button.config(bg="red")
         stop_data_sender_thread()   # stop thread 
-        command="q"
+        command="0"
         command_sender(ser=ser,cmd=command)
         toggle_disabled(real_var,batch_var)
 

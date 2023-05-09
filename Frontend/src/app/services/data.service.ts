@@ -36,7 +36,7 @@ export class DataService {
 
   getUpdates(curGraph: number) {
     let socket = io(this.baseUrl);
-    console.log("Connecting");
+    //console.log("Connecting");
 
     socket.emit('unsubscribe');
 
@@ -49,7 +49,7 @@ export class DataService {
     });
 
     const disconnectSocket = () => {
-      console.log("Disconecting");
+      //console.log("Disconecting");
       socket.disconnect();
     };
 

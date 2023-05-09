@@ -30,7 +30,7 @@ export class LiveChartComponent {
 
 
   private svgElement: HTMLElement;
-  private minutesToShow = 3;
+  private minutesToShow = 1;
   private chartProps: any;
   curColor: string;
   @Output() curIcon: number = 1;
@@ -194,7 +194,6 @@ export class LiveChartComponent {
 
   // A custom method to check should retry a request or not
   shouldRetry() {
-    console.log("Error ocured");
     this.removeAllCharts();
     return of(null).pipe(delay(1000));  
   }
@@ -254,7 +253,8 @@ export class LiveChartComponent {
           });  
       }, 
       error: error => {
-        console.log("Error occured");
+        console.log("Error occured while trying to get initial data");
+
         this.removeAllCharts();    
       }
     });

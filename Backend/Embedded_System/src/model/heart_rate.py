@@ -9,8 +9,8 @@ from src.utilities.constants import left_hand_data_length
 
 def heart_rate_reader(data, userID):
     date = datetime.now()
-    if len(data) == left_hand_data_length:
-        heart_rate = int(data[19]) 
+    if len(data) >20:
+        heart_rate = data[20][:-3] 
         heart_pack = {"userID": userID, "rate": heart_rate, "date": date}
         return heart_pack
     else:
