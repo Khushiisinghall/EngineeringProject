@@ -12,14 +12,12 @@ url_skin_sensor="http://localhost:8080/api/skin_sensor/"
 
 # chunk size mb  of batch file
 chunk_size=10
-
-# constant for sensor 
-left_hand_data_length=21
-other_data_length=18
-brain_sensor_length=19
 #serial connection 
-port_name="COM8"  #"/dev/ttyACM0" for linux
-baudrate=9600
+########################################### Serial connection and comand for harware ##################################
+SERIAL_PORT="/dev/ttyUSB0"  #"/dev/ttyACM0" for linux
+BAUD_RATE=115200
+START_COMMAND="1"
+STOP_COMMAND="0"
 # EEG
 MUSE_NB_EEG_CHANNELS = 5
 MUSE_SAMPLING_EEG_RATE = 256

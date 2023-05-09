@@ -5,10 +5,12 @@ Author: Nurlan Sarkhanov
 Date: May 4, 2023
 """
 from datetime import datetime
+from utilities.constants import *
+
 #read data from skin sensor data. 
 def skin_rate_reader(data, userID):
     date = datetime.now()
-    if len(data) >20:
+    if len(data) == left_hand_data_length:
         skin_rate = data[19] # extract heart rate value and convert to integer
         skin_pack = {"userID": userID, "rate": skin_rate, "date": date}
         return skin_pack
@@ -20,16 +22,13 @@ def skin_rate_reader(data, userID):
 def imu_sensor_reader(data,userID):
     sensorID=data[0]
     date=datetime.now()
-    if len(data) >= 18:
+    if len(data) >= other_data_length:
         acceleration= [data[1],data[7],data[13]]
         orientation = [data[2],data[8],data[14]]
         gyro=         [data[3],data[9],data[15]]
         magnetic=     [data[4],data[10],data[16]]
         linear=       [data[5],data[11],data[17]]
-        if len(data) ==19:
-            gravity= [data[6],data[12],data[18][:-2]]
-        else:
-            gravity= [data[6],data[12],data[18]]
+        gravity=      [data[6],data[12],data[18]]
         imu_pack={"userID":userID,"sensorID":sensorID,"acceleration":acceleration,
                 "orientation":orientation,"gyro":gyro,"magnetic":magnetic,
                 "linear":linear,"gravity":gravity,"date":date}
@@ -40,8 +39,8 @@ def imu_sensor_reader(data,userID):
 #read data from heart sensor data. 
 def heart_rate_reader(data, userID):
     date = datetime.now()
-    if len(data) >20:
-        heart_rate = data[20][:-3]
+    if len(data) == left_hand_data_length:
+        heart_rate = int(data[19]) 
         heart_pack = {"userID": userID, "rate": heart_rate, "date": date}
         return heart_pack
     else:

@@ -5,36 +5,14 @@ Author: Nurlan Sarkhanov
 Date: April 22, 2023
 """
 import serial
-from src.model.models import *
+from src.model.heart_rate import heart_rate_reader
+from src.model.imu_sensor import imu_sensor_reader
+from  src.model.skin_sensor import skin_rate_reader
+from src.model.brain_sensor import brain_sensor_reader
 import json,os,time
 from datetime import datetime
 import requests
-from src.utilities.constants import *
-from pylsl import StreamInlet, resolve_byprop
-
-def EEG():
-    streams = resolve_byprop('type', 'EEG', timeout=LSL_SCAN_TIMEOUT)
-    if len(streams) == 0:
-        raise(RuntimeError("Can't find EEG stream."))
-        
-    else:
-        inlet = StreamInlet(streams[0], max_chunklen=LSL_EEG_CHUNK)
-        sample=inlet.pull_sample()
-        return sample
-
-def eeg_sender(userID):
-    sample=EEG()
-    if sample==None:
-        pass
-    else:
-        brain_pack=brain_sensor_reader(data=sample,userID=userID)
-        r=requests.post(url_brain_sensor, brain_pack)
-        if r.status_code == 200:  # check if the request was successful
-            print(f"Brain  rate sent successfully:{brain_pack}")
-        else:
-            print(f"Error sending heart rate: {r.status_code}")
-
-
+from src.utilities.constants import url_brain_sensor,url_imu_sensor,url_heart_rate,url_skin_sensor,chunk_size
 
 class CustomJSONEncoder(json.JSONEncoder):
     def default(self, obj):
@@ -132,12 +110,15 @@ def read_batch_data():
     for item in data:
         if 'imu_rates' in item:
             r=requests.post(url_imu_sensor, data=item['imu_rates'])
+            time.sleep(0.1)
             print("Imu sensor data sent successfully.")
         if 'skin_rate' in item:
             r=requests.post(url_skin_sensor,data=item['skin_rate'])
+            time.sleep(0.1)
             print("Skin sensor data sent successfully.")
         if 'hear_rate' in item:
             r=requests.post(url_heart_rate,item['hear_rate'])
+            time.sleep(0.1)
             print("Heart rate sensor data sent successfully.")
     print("Chunk data sent successfuly.")
     print(f"Data size:{get_size_mb(batch_path)} mb. Length:{len(data)}")
