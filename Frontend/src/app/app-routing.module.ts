@@ -9,7 +9,6 @@ import { PriorityMatrixComponent } from './priority-matrix/priority-matrix.compo
 import { SkillMatrixComponent } from './skill-matrix/skill-matrix.component';
 import { CapabiltiyLevelComponent } from './capability-level/capability-level.component';
 import { SchedulerComponent } from './scheduler/scheduler.component';
-import { VitalTrackerComponent } from './vital-tracker/vital-tracker/vital-tracker.component';
 import { AboutComponent } from './vital-tracker/about/about.component';
 import { LiveChartComponent } from './vital-tracker/live-chart/live-chart.component';
 import { HistoricalChartComponent } from './vital-tracker/historical-chart/historical-chart.component';
@@ -40,7 +39,6 @@ const APP_routes: Routes = [
       { path: 'HistoricalReport', component: HistoricalChartComponent,canActivate:[AuthGuard] }
     ]
   }
-  // {path: "vital-tracker", component: VitalTrackerComponent}
 ];
 
 export const routing = RouterModule.forRoot(APP_routes)

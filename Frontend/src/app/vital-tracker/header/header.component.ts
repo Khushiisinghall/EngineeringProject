@@ -1,7 +1,7 @@
 import { Component, Inject, DoCheck } from '@angular/core';
-import { LiveService } from 'src/app/services/live.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { LiveService } from '../services/liveservice/live.service';
 
 @Component({
   selector: 'app-header',

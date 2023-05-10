@@ -7,10 +7,10 @@ Date: April 22, 2023
 import tkinter as tk
 from tkinter import ttk
 import threading
-from src.utilities.utility import serial_connection,command_sender,sender,sender_batch
-from src.utilities.constants import port_name,baudrate
+from src.utilities.utility import *
+from src.utilities.constants import *
 #create serial connection with esps
-ser=serial_connection(port_name=port_name,baudrate=baudrate)
+ser=serial_connection(port_name=SERIAL_PORT,baudrate=BAUD_RATE)
 # stop sending thred
 def stop_data_sender_thread():
     # set the event to signal the thread to stop
@@ -22,6 +22,7 @@ def data_sender():
         sensor_data = ser.readline().decode()
         if mode_status=="real-time":
             sender(data=sensor_data, userID=userID)
+            # eeg_sender(userID=userID)
         elif mode_status=="batch":
             finished=sender_batch(data=sensor_data, userID=userID)
             if finished:
@@ -37,16 +38,16 @@ def toggle_disabled(real_var,batch_var):
 def run():
         # Function to handle start/stop/pause button press
     def start():
-        global command, stop_event
+        global stop_event
         # create an event object to signal the thread to stop
         stop_event = threading.Event()
-        command="s"
+
         # data_logger.commander(ser,command)
-        if len(userID)>0 and command=="s" and (mode_status=="batch" or mode_status=="real-time"):
+        if len(userID)>0 and START_COMMAND=="1" and (mode_status=="batch" or mode_status=="real-time"):
             start_button.config(bg="green")
             canvas.itemconfig(circle, fill="green")
             stop_button.config(bg="white")
-            command_sender(ser=ser,cmd=command)
+            command_sender(ser=ser,cmd=START_COMMAND)
             data_sender_thread = threading.Thread(target=data_sender,)
             data_sender_thread.start()    
     def stop():
@@ -54,8 +55,7 @@ def run():
         start_button.config(bg="white")
         stop_button.config(bg="red")
         stop_data_sender_thread()   # stop thread 
-        command="q"
-        command_sender(ser=ser,cmd=command)
+        command_sender(ser=ser,cmd=STOP_COMMAND)
         toggle_disabled(real_var,batch_var)
 
     def toggle_circle():

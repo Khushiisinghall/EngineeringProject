@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../service/auth.service';
+import { AuthService } from '../services/authservice/auth.service';
 import { ToastrService } from 'ngx-toastr'
 
 @Component({
@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr'
 export class RegisterComponent {
 
   constructor(private builder: FormBuilder, private service: AuthService, private router: Router,
-    private toastr: ToastrService) {
+    @Inject(ToastrService) private toastr: ToastrService) {
 
   }
 
