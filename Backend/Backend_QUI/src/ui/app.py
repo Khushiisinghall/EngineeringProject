@@ -51,9 +51,11 @@ def run():
             stop_button.config(bg="white")
             command_sender(ser=ser,cmd=START_COMMAND)
             data_sender_thread = threading.Thread(target=data_sender,)
-            muse_sender_thread = threading.Thread(target=muse_data_sender,)
+            if mode_status=="start":
+                muse_sender_thread = threading.Thread(target=muse_data_sender,)
+                muse_sender_thread.start()
             data_sender_thread.start()  
-            muse_sender_thread.start()
+            
   
     def stop():
         canvas.itemconfig(circle, fill="red")
@@ -115,7 +117,7 @@ def run():
     # Create start/stop/pause buttons
     start_button = tk.Button(master=window, text="START", command=start,height=2,width=6)
     stop_button = tk.Button(master=window, text="STOP", command=stop,height=2,width=6)
-    batch_button=tk.Checkbutton(master=window,text="Batch",variable=batch_var,command=toggle_batch)
+    # batch_button=tk.Checkbutton(master=window,text="Batch",variable=batch_var,command=toggle_batch)
     real_button=tk.Checkbutton(master=window,text="Real-Time",variable=real_var ,command=toggle_real_time)
     muse_button=tk.Checkbutton(master=window,text="Muse",variable=muse_var,command=toggle_muse)
 
