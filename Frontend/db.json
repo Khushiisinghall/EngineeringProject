@@ -1,7 +1,7 @@
 {
   "user": [
     {
-      "id": "admin",
+      "username": "admin",
       "userid": "001",
       "name": "NT Infotech",
       "password": "Test$1234",
@@ -14,7 +14,7 @@
       }
     },
     {
-      "id": "testuser",
+      "username": "testuser",
       "userid": "002",
       "name": "Test User",
       "password": "Test@1234",
@@ -24,7 +24,7 @@
       "isactive": true
     },
     {
-      "id": "Jhon1",
+      "username": "Jhon1",
       "userid": "003",
       "name": "NT Infotech",
       "password": "Test@1233",
@@ -34,7 +34,7 @@
       "isactive": true
     },
     {
-      "id": "ntuser",
+      "username": "ntuser",
       "userid": "004",
       "name": "ramesh",
       "password": "Test@1234",
@@ -44,7 +44,7 @@
       "isactive": true
     },
     {
-      "id": "test1",
+      "username": "test1",
       "userid": "005",
       "name": "Test 1",
       "password": "Test@1234",
@@ -54,7 +54,7 @@
       "isactive": true
     },
     {
-      "id": "test55",
+      "username": "test55",
       "userid": "006",
       "name": "Test 55",
       "password": "Test@1234",
@@ -64,7 +64,7 @@
       "isactive": true
     },
     {
-      "id": "test12",
+      "username": "test12",
       "userid": "",
       "name": "Test12",
       "password": "Test@1234",
@@ -74,7 +74,7 @@
       "isactive": false
     },
     {
-      "id": "test7",
+      "username": "test7",
       "userid": "009",
       "name": "Test 7",
       "password": "Test@1234",
