@@ -65,6 +65,7 @@ require("./app/routes/assembly_sequence_plan_details.routes")(app);
 require("./app/routes/dimension_per_component.routes")(app);
 require("./app/routes/working_area.routes")(app);
 require("./app/routes/assembly_sequence_step_detail.routes")(app);
+require("./app/routes/user.routes")(app);
 require("./app/routes/heart_rate_sensor.routes")(app);
 require("./app/routes/imu_sensor.routes")(app);
 require("./app/routes/brain_sensor.routes")(app);
