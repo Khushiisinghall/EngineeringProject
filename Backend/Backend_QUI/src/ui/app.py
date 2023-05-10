@@ -9,6 +9,9 @@ from tkinter import ttk
 import threading
 from src.utilities.utility import *
 from src.utilities.constants import *
+global muse_status
+muse_status=""
+
 #create serial connection with esps
 ser=serial_connection(port_name=SERIAL_PORT,baudrate=BAUD_RATE)
 # stop sending thred
@@ -20,22 +23,21 @@ def data_sender():
     while not stop_event.is_set():
         # receive data from serial port and log it
         sensor_data = ser.readline().decode()
-        if mode_status=="real-time":
-            sender(data=sensor_data, userID=userID)
+        sender(data=sensor_data, userID=userID)
 ()
 def muse_data_sender():
     while not stop_event.is_set():
     # receive data from serial port and log it
-        if mode_status=="real-time":
-             eeg_sender(userID=userID)
+        # if mode_status=="real-time":
+        eeg_sender(userID=userID)
 
 
         
-def toggle_disabled(real_var,batch_var):
-        real_var.set(0)
-        batch_var.set(0)
-        global mode_status
-        mode_status=""
+# def toggle_disabled(real_var,batch_var):
+#         real_var.set(0)
+#         batch_var.set(0)
+#         global mode_status
+#         mode_status=""
 
 def run():
         # Function to handle start/stop/pause button press
@@ -45,13 +47,13 @@ def run():
         stop_event = threading.Event()
 
         # data_logger.commander(ser,command)
-        if len(userID)>0 and START_COMMAND=="1" and (mode_status=="batch" or mode_status=="real-time"):
+        if len(userID)>0 and START_COMMAND=="1" : #and (mode_status=="batch" or mode_status=="real-time")
             start_button.config(bg="green")
             canvas.itemconfig(circle, fill="green")
             stop_button.config(bg="white")
             command_sender(ser=ser,cmd=START_COMMAND)
             data_sender_thread = threading.Thread(target=data_sender,)
-            if mode_status=="start":
+            if muse_status=="start":
                 muse_sender_thread = threading.Thread(target=muse_data_sender,)
                 muse_sender_thread.start()
             data_sender_thread.start()  
@@ -63,7 +65,7 @@ def run():
         stop_button.config(bg="red")
         stop_data_sender_thread()   # stop thread 
         command_sender(ser=ser,cmd=STOP_COMMAND)
-        toggle_disabled(real_var,batch_var)
+        # toggle_disabled(real_var,batch_var)
 
     def toggle_circle():
         canvas.itemconfigure(circle, state=tk.HIDDEN if canvas.itemcget(circle, "state") == tk.NORMAL else tk.NORMAL)
@@ -73,34 +75,34 @@ def run():
         global userID
         userID=user_entry.get()
 
-    def toggle_batch():
-        if batch_var.get()==1:
-            print("Batch Process is selected.")
-            batch_var.set(1)
-            real_var.set(0)
-            global mode_status
-            mode_status="batch"
-        else:
-            batch_var.set(0)
+    # def toggle_batch():
+    #     if batch_var.get()==1:
+    #         print("Batch Process is selected.")
+    #         batch_var.set(1)
+    #         real_var.set(0)
+    #         global mode_status
+    #         mode_status="batch"
+    #     else:
+    #         batch_var.set(0)
     def toggle_muse():
         if muse_var.get()==1:
             print("Muse data is selected.")
-            global muse_status
-            mode_status="send"
+            
+            muse_status="Start"
         else:
             muse_var.set(0)            
-            mode_status="dont send"
+            muse_status="Stop"
 
 
-    def toggle_real_time():
-        if real_var.get()==1:
-            real_var.set(1)
-            batch_var.set(0)
-            global mode_status
-            mode_status="real-time"
-            print("Real-Time process is selected.")
-        else:
-            real_var.set(0)
+    # def toggle_real_time():
+    #     if real_var.get()==1:
+    #         real_var.set(1)
+    #         batch_var.set(0)
+    #         global mode_status
+    #         mode_status="real-time"
+    #         print("Real-Time process is selected.")
+    #     else:
+    #         real_var.set(0)
 
     # Create root window
     window = tk.Tk()
@@ -111,14 +113,14 @@ def run():
     user_label = tk.Label(master=window, text="User ID:")
     user_entry = tk.Entry(master=window)
     save_button = tk.Button(master=window, text="Save",command=getuser_entry)
-    batch_var = tk.BooleanVar(value=False)
-    real_var = tk.BooleanVar(value=False)
+    # batch_var = tk.BooleanVar(value=False)
+    # real_var = tk.BooleanVar(value=False)
     muse_var=tk.BooleanVar(value=False)
     # Create start/stop/pause buttons
     start_button = tk.Button(master=window, text="START", command=start,height=2,width=6)
     stop_button = tk.Button(master=window, text="STOP", command=stop,height=2,width=6)
     # batch_button=tk.Checkbutton(master=window,text="Batch",variable=batch_var,command=toggle_batch)
-    real_button=tk.Checkbutton(master=window,text="Real-Time",variable=real_var ,command=toggle_real_time)
+    # real_button=tk.Checkbutton(master=window,text="Real-Time",variable=real_var ,command=toggle_real_time)
     muse_button=tk.Checkbutton(master=window,text="Muse",variable=muse_var,command=toggle_muse)
 
     # ading to windows
@@ -130,7 +132,7 @@ def run():
     start_button.place(relx=0.37,rely=0.4)
     stop_button.place(relx=0.54,rely=0.4)
     # batch_button.place(relx=0.75,rely=0.4)
-    real_button.place(relx=0.75,rely=0.45)
+    # real_button.place(relx=0.75,rely=0.45)
     muse_button.place(relx=0.75,rely=0.3)
     # Create canvas for status circle
     canvas = tk.Canvas(master=window, width=80, height=80)

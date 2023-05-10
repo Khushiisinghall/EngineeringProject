@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BrainSensorData } from 'BrainSensorData';
 import { IMUSensorData } from 'IMUSensorData';
 import { LiveService } from '../services/liveservice/live.service';
+import { DateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-historical-chart',
@@ -65,6 +66,14 @@ export class HistoricalChartComponent {
     this.curIcon = this.liveService.getCurrentDisplayGraph();
     this.getDataAndUpdateChart(true);
 
+  }
+
+  ngOnDestroy() {
+    this.graphSubscription.unsubscribe();
+    this.startTimeSubscription.unsubscribe();
+    this.endTimeSubscription.unsubscribe();
+    this.museSubscription.unsubscribe();
+    this.dataSubscription.unsubscribe();
   }
 
   constructor(@Inject(LiveService) private liveService:LiveService,
@@ -175,7 +184,6 @@ export class HistoricalChartComponent {
         this.dataToPlot = (this.data as HeartSkinRateData[]).filter(data => data.date.getTime() >= startTimeTime && data.date.getTime() <= endTimeTime);
         break;
       }
-    console.log("Filtering. After dataToPlot is: " + this.dataToPlot)
 
   }
 
@@ -184,20 +192,18 @@ export class HistoricalChartComponent {
     this.dataSubscription = this.dataService.getInitialData(1, this.curIcon)
       .subscribe({
         next: (data) => {
-          data.map(d => d.date = new Date(d.date))
+          data.map(d => d.date = new Date(d.date));
           this.data = data;
           this.dataToPlot = data;
           this.min = this.findExtremeDate(data, true);
           // first case, now start/end point set yet, so set to min/max
           if (typeof this.liveService.getStartTime() == 'undefined' || this.liveService.getStartTime() == null) {
             this.startTime = this.min;
-            this.liveService.setMin(this.min);
             this.liveService.setStartTime(this.min);
           }
           else {
             this.startTime = this.liveService.getStartTime();
           }
-
           this.max = this.findExtremeDate(data, false);
           if (typeof this.liveService.getEndTime() == 'undefined' || this.liveService.getEndTime() == null) {
             this.endTime = this.max;
@@ -206,6 +212,9 @@ export class HistoricalChartComponent {
           else {
             this.endTime = this.liveService.getEndTime();
           }
+          this.liveService.setMin(this.min);
+          this.liveService.setMax(this.max);
+
           this.filter_dataToPlot();
           if (!isInitial) {
             this.removeAllCharts();
@@ -689,7 +698,7 @@ export class HistoricalChartComponent {
     }
 
     var yAxis = d3.axisLeft(chartProps.y)
-    .ticks(2)
+    .ticks(3)
     .tickSizeInner(-width)
     .tickSizeOuter(0);
   
@@ -927,10 +936,6 @@ export class HistoricalChartComponent {
   }
 
 
-
-
-
-
   buildChartHeartSkin() {
     const chartId = `chart-${0}`;
     const chartContainer = document.createElement('div');
@@ -955,7 +960,7 @@ export class HistoricalChartComponent {
       // .tickSizeInner(-height)
       // .tickSizeOuter(0);
     var yAxis = d3.axisLeft(this.chartProps.y)
-    .ticks(5)
+    .ticks(3)
     .tickSizeInner(-width)
     .tickSizeOuter(0);
   
@@ -1109,9 +1114,11 @@ export class HistoricalChartComponent {
 
   removeChart(graphNumber: number) {
     const chartContainer = document.getElementById(`chart-${graphNumber}`);
-    if (chartContainer && chartContainer.parentNode)
+    if (chartContainer && chartContainer.parentNode === this.chartElement.nativeElement) {
       this.chartElement.nativeElement.removeChild(chartContainer);
+    }
   }
+  
 
   removeAllCharts() {
     for (let i = 0; i < 7; ++i) {
