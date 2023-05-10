@@ -17,6 +17,9 @@ export class LiveService {
   private startTimeSubject = new Subject<any>();
   private endTimeSubject = new Subject<any>();
 
+  private min: Date;
+  private max: Date;
+
   private museSelected: number[] = [1, 2, 3, 4, 5];//['TP9', 'AF7','AF8','TP10','RightAUX']
   private museSubject = new Subject<any>();
 
@@ -214,6 +217,14 @@ export class LiveService {
     this.endTime = endTime;
   }
 
+  setMin(startTime: Date) {
+    this.startTime = startTime;
+  }
+
+  setMax(startTime: Date) {
+    this.startTime = startTime;
+  }
+
   getStartTime() {
     return this.startTime;
   }
@@ -222,4 +233,11 @@ export class LiveService {
     return this.endTime;
   }
 
+  getMin() {
+    return this.min;
+  }
+
+  getMax() {
+    return this.max;
+  }
 }

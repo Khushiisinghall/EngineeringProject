@@ -158,21 +158,25 @@ export class HistoricalChartComponent {
    * and in case on IMU also filters data with right sensorID
    */
   filter_dataToPlot() {
+    var startTimeTime = (this.startTime as Date).getTime();
+    var endTimeTime = (this.endTime as Date).getTime();
     switch (this.curIcon) {
       case 1:
-        this.dataToPlot = (this.data as BrainSensorData[]).filter(data => data.date.getTime() >= this.startTime.getTime() && data.date.getTime() <= this.endTime.getTime());
+        this.dataToPlot = (this.data as BrainSensorData[]).filter(data => data.date.getTime() >= startTimeTime && data.date.getTime() <= endTimeTime);
         break;
       case 2:
-        this.dataToPlot = (this.data as HeartSkinRateData[]).filter(data => data.date.getTime() >= this.startTime.getTime() && data.date.getTime() <= this.endTime.getTime());
+        this.dataToPlot = (this.data as HeartSkinRateData[]).filter(data => data.date.getTime() >= startTimeTime && data.date.getTime() <= endTimeTime);
         break;
       case 3:
-        this.dataToPlot = (this.data as IMUSensorData[]).filter(data => data.date.getTime() >= this.startTime.getTime() && data.date.getTime() <= this.endTime.getTime()
+        this.dataToPlot = (this.data as IMUSensorData[]).filter(data => data.date.getTime() >= startTimeTime && data.date.getTime() <= endTimeTime
                                                                     && data.sensorID == this.imuSensor);
         break;
       case 4:
-        this.dataToPlot = (this.data as HeartSkinRateData[]).filter(data => data.date.getTime() >= this.startTime.getTime() && data.date.getTime() <= this.endTime.getTime());
+        this.dataToPlot = (this.data as HeartSkinRateData[]).filter(data => data.date.getTime() >= startTimeTime && data.date.getTime() <= endTimeTime);
         break;
       }
+    console.log("Filtering. After dataToPlot is: " + this.dataToPlot)
+
   }
 
   getDataAndUpdateChart(isInitial: boolean) {
@@ -187,6 +191,7 @@ export class HistoricalChartComponent {
           // first case, now start/end point set yet, so set to min/max
           if (typeof this.liveService.getStartTime() == 'undefined' || this.liveService.getStartTime() == null) {
             this.startTime = this.min;
+            this.liveService.setMin(this.min);
             this.liveService.setStartTime(this.min);
           }
           else {
@@ -288,7 +293,6 @@ export class HistoricalChartComponent {
   }
 
   buildChartIMU() {
-    console.log("Building IMU chart");
     for (let i = 0; i < this.imuData.length; ++i) {
       let graphNumber = this.imuData[i];
       this.buildIMUChartComponent(graphNumber);
@@ -484,19 +488,6 @@ export class HistoricalChartComponent {
       tooltipCircles.push(tooltipCircle);
 
     }
-    // var tooltipCircle = svg
-    // .append('circle')
-    // .attr("class", "tooltip-circle")
-    // .attr("r", 5)
-    // .style("fill", "steelblue")
-    // .style("opacity", 0);
-
-    // var tooltipCircle2 = svg
-    // .append('circle')
-    // .attr("class", "tooltip-circle2")
-    // .attr("r", 5)
-    // .style("fill", "red")
-    // .style("opacity", 0);
 
       // Select all elements with class "line" and add a mouseover event listener
       d3.select(`#${chartId}`)
@@ -517,7 +508,10 @@ export class HistoricalChartComponent {
         // Convert the x and y coordinates of the mouse pointer to their corresponding data values on the chart
         var x0 = chartProps.x.invert(mouseX-198);
         const i = closestIndex(x0, _this.dataToPlot);
-
+        if (i == -1) {
+          console.log("There is no data in range you selected");
+          return;
+        }
         var d: IMUSensorData = _this.dataToPlot[i] as IMUSensorData;
 
         // Set the content and position of the tooltip based on the closest data point to the x value of the mouse pointer
@@ -660,17 +654,6 @@ export class HistoricalChartComponent {
         .attr('alignment-baseline', 'hanging')
         .attr('font-size', size);   
 
-  
-    // Setting the required objects in chartProps so they could be used to update the chart
-    // chartProps.svg = svg;
-    // chartProps.valueline = valueline;
-    // chartProps.tooltip = tooltip;
-    // chartProps.tooltipCicle = tooltipCircle
-    // chartProps.margin = margin;
-    // // this.chartProps.valueline2 = valueline2;
-    // // this.chartProps.xAxis = xAxis;
-    // chartProps.yAxis = yAxis;
-    // this.chartPropsMuse.push(chartProps);
   }
 
   buildMuseChartComponent(graphNumber: number, color: string, isLast: boolean) {
@@ -733,15 +716,6 @@ export class HistoricalChartComponent {
             throw new Error("Trying to plot muse/brain data but data does not have any brain data (TP9, AF7,...)");
         }
       });
-  
-    // Define the line
-    // var valueline2 = d3.line<MarketPrice>()
-    //   .x(function (d) {
-    //     if (d.date instanceof Date) {
-    //       return _this.chartProps.x(d.date.getTime());
-    //     }
-    //   })
-    //   .y(function (d) { console.log('Open market'); return _this.chartProps.y(d.open); });
   
     var svg = d3.select(`#${chartId}`)
       .append('svg')
@@ -997,15 +971,7 @@ export class HistoricalChartComponent {
       .y(function (d: HeartSkinRateData) { 
         return _this.chartProps.y(d.rate); 
       });
-  
-    // Define the line
-    // var valueline2 = d3.line<MarketPrice>()
-    //   .x(function (d) {
-    //     if (d.date instanceof Date) {
-    //       return _this.chartProps.x(d.date.getTime());
-    //     }
-    //   })
-    //   .y(function (d) { console.log('Open market'); return _this.chartProps.y(d.open); });
+
   
     var svg = d3.select(`#${chartId}`)
       .append('svg')
@@ -1166,6 +1132,9 @@ export class HistoricalChartComponent {
 
 function closestIndex(num: number, arr: HeartSkinRateData[] | BrainSensorData[] | IMUSensorData[]) {
   let index = 0;
+  if (arr[index] === undefined || arr[index] == null) {
+    return -1;
+  }
   let curMinDiff = Math.abs(num - arr[index].date.getTime());
   for (let val = 0; val < arr.length; val++) {
      let newdiff = Math.abs(num - arr[val].date.getTime());
