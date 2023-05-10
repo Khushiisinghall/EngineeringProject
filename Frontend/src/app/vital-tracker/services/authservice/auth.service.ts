@@ -14,23 +14,20 @@ export class AuthService {
   hardwareapiurl='';
 
   RegisterUser(inputdata:any){
-    return this.http.post(this.apiurl,inputdata)
+    return this.http.post(this.mongourl,inputdata)
   }
-  GetUserbyCode(id:any){
-    return this.http.get(this.apiurl+'/'+id);
+  GetUserbyCode(username:any){
+    return this.http.get(this.mongourl+'/'+username);
   }
   Getall(){
-    return this.http.get(this.apiurl);
+    return this.http.get(this.mongourl);
   }
-  updateuser(id:any,inputdata:any){
-    return this.http.put(this.apiurl+'/'+id,inputdata);
+  updateuser(username:any,inputdata:any){
+    return this.http.put(this.mongourl+'/'+username,inputdata);
   }
   CallHardware(userid:any){
      return this.http.post(this.hardwareapiurl,userid);
   }
-  // getuserrole(){
-  //   return this.http.get('http://localhost:3000/role');
-  // }
   isloggedin(){
     return sessionStorage.getItem('username')!=null;
   }
