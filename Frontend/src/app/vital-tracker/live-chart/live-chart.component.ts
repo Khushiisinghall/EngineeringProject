@@ -93,6 +93,10 @@ export class LiveChartComponent {
     // Call the disconnect function to close the socket connection
     if (this.updates)
       this.updates.disconnectSocket();
+
+    this.liveService.setStartTime(this.liveService.getMin());
+    this.liveService.setEndTime(this.liveService.getMax());
+    
   }
 
   constructor(@Inject(LiveService) private liveService:LiveService,
@@ -204,12 +208,6 @@ export class LiveChartComponent {
       }
   }
 
-  // A custom method to check should retry a request or not
-  shouldRetry() {
-    console.log("Error ocured");
-    this.removeAllCharts();
-    return of(null).pipe(delay(1000));  
-  }
 
   getDataAndUpdateChart(isInitial: boolean) {
     // parameters: userID, curIcon/curGraph,
@@ -816,6 +814,7 @@ export class LiveChartComponent {
           return chartProps.x(d.date.getTime());
       })
       .y(function (d: BrainSensorData) { 
+        console.log("graphNumber: " + graphNumber + " d: " + JSON.stringify(d));
         switch(graphNumber) {
           case 1: 
             return chartProps.y(d.TP9);
@@ -915,8 +914,10 @@ export class LiveChartComponent {
       .html(function(d, i) {
         var timeDiv = '<span class="tick-time">' + d3.timeFormat('%H:%M:%S')(new Date(d)) + '</span>';
 
+        if (_this.dataToPlot[i] == undefined)
+          return '<div class = "tick-value">' + '<br>' + timeDiv + '</div>';
         // Check if the current tick value is the first or last value, or if the date has changed
-        if (i === 0 || i === _this.dataToPlot.length - 1 || _this.dataToPlot[i].date.getDate() !== _this.dataToPlot[i - 1].date.getDate()) {
+        if (i === 0  || _this.dataToPlot[i].date.getDate() !== _this.dataToPlot[i - 1].date.getDate()) {
           var dateDiv = '<span class="tick-date">' + d3.timeFormat('%Y-%m-%d')(new Date(d)) + '</span>';
           return '<div class = "tick-value">' + dateDiv + '<br>' + timeDiv + '</div>';
         } else {
@@ -1438,6 +1439,8 @@ export class LiveChartComponent {
   }
 
   updateChartIMU(latestDataPoint: HeartSkinRateData | BrainSensorData | IMUSensorData) {
+    if ((latestDataPoint as IMUSensorData).sensorID != this.imuSensor)
+      return;
     latestDataPoint.date = new Date(latestDataPoint.date);
     if (this.dataToPlot[0].date.getTime() < latestDataPoint.date.getTime() - this.minutesToShow * 60000  )
       this.dataToPlot.shift();

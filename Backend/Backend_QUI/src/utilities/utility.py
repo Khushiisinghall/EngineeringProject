@@ -115,42 +115,5 @@ def data_saver(data,userID):
         json.dump(batch_data, f,cls=CustomJSONEncoder)
         
 
-def get_size_mb(file_path):
-    file_size = os.path.getsize(file_path)
-# Convert the file size to a human-readable format (e.g. MB or GB)
-    size_in_mb = file_size / (1024 * 1024)
-    return size_in_mb
-# Set the headers and the JSON data in the request
 
-
-def read_batch_data():
-    # Open the file for reading
-    with open(batch_path, 'r') as f:
-        # Load the JSON data from the file
-        data= json.load(f,cls=CustomJSONDecoder)
-    # Collect the IMU, heart rate, and skin data from each item
-    for item in data:
-        if 'imu_rates' in item:
-            r=requests.post(url_imu_sensor, data=item['imu_rates'])
-            print("Imu sensor data sent successfully.")
-        if 'skin_rate' in item:
-            r=requests.post(url_skin_sensor,data=item['skin_rate'])
-            print("Skin sensor data sent successfully.")
-        if 'hear_rate' in item:
-            r=requests.post(url_heart_rate,item['hear_rate'])
-            print("Heart rate sensor data sent successfully.")
-    print("Chunk data sent successfuly.")
-    print(f"Data size:{get_size_mb(batch_path)} mb. Length:{len(data)}")
-    print("File is cleaned,start writing again.")
-
-
-
-def sender_batch(data,userID):
-    data_saver(data,userID)
-    # Collect data from sensor
-    if get_size_mb(batch_path)>chunk_size:
-        read_batch_data()
-        return True
-    else:
-        print(f"Saving data in json.Size: {get_size_mb(batch_path)} (Limit:{chunk_size} mb)")
         
