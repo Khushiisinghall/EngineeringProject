@@ -327,7 +327,7 @@ export class HistoricalChartComponent {
     
 
     var yAxis = d3.axisLeft(chartProps.y)
-    .ticks(0.5)
+    .ticks(3)
     .tickSizeInner(-width)
     .tickSizeOuter(0);
   
@@ -689,7 +689,7 @@ export class HistoricalChartComponent {
     }
 
     var yAxis = d3.axisLeft(chartProps.y)
-    .ticks(0.5)
+    .ticks(2)
     .tickSizeInner(-width)
     .tickSizeOuter(0);
   
