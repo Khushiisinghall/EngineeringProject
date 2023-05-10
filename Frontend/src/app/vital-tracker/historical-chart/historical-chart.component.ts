@@ -214,10 +214,6 @@ export class HistoricalChartComponent {
           }
           this.liveService.setMin(this.min);
           this.liveService.setMax(this.max);
-          console.log("min: " + this.min);
-          console.log("max: " + this.max);
-          console.log("current start time: " + this.startTime);
-          console.log("current end time: " + this.endTime);
 
           this.filter_dataToPlot();
           if (!isInitial) {
