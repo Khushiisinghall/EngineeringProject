@@ -15,6 +15,7 @@ db.dimension_per_component = require("./dimension_per_component.js")(mongoose);
 db.working_area = require("./working_area.js")(mongoose);
 db.assembly_sequence_step_detail = require("./assembly_sequence_step_detail.js")(mongoose)
 // sensors
+db.user= require("./user.js")(mongoose);
 db.heart_rate= require("./heart_rate_sensor.js")(mongoose);
 db.brain_sensor= require("./brain_sensor.js")(mongoose);
 db.imu_sensor= require("./imu_sensor.js")(mongoose);

@@ -6,14 +6,6 @@ const app = express();
 //const { Server: SocketServer } = require('socket.io');
 const initRoutes = require("./app/routes/picture.routes");
 
-
-//const server = http.createServer(app);
-//const io = new SocketServer(server, {
-//  cors: {
-//    origin: 'http://localhost:4200',
-//  }
-//});
-
 var corsOptions = {
   origin: "*"
 };
@@ -22,14 +14,6 @@ app.use(cors(corsOptions));
 //app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 initRoutes(app);
-
-// let port = 8080;
-// app.listen(port, () => {
-//   console.log(`Running at localhost:${port}`);
-// });
-
-
-
 
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -65,6 +49,7 @@ require("./app/routes/assembly_sequence_plan_details.routes")(app);
 require("./app/routes/dimension_per_component.routes")(app);
 require("./app/routes/working_area.routes")(app);
 require("./app/routes/assembly_sequence_step_detail.routes")(app);
+require("./app/routes/user.routes")(app);
 require("./app/routes/heart_rate_sensor.routes")(app);
 require("./app/routes/imu_sensor.routes")(app);
 require("./app/routes/brain_sensor.routes")(app);
