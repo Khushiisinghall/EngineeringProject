@@ -84,6 +84,13 @@ export class LiveChartComponent {
 
     this.liveService.setStartTime(this.liveService.getMin());
     this.liveService.setEndTime(this.liveService.getMax());
+
+    this.graphSubscription.unsubscribe();
+    this.startTimeSubscription.unsubscribe();
+    this.endTimeSubscription.unsubscribe();
+    this.museSubscription.unsubscribe();
+    this.dataSubscription.unsubscribe();
+    this.dataUpdateSubscription.unsubscribe();
     
   }
 
@@ -214,6 +221,7 @@ export class LiveChartComponent {
         // first disconnect socket if still active
         if (this.updates)
           this.updates.disconnectSocket();
+        console.log("Calling getUpdates");
         this.updates =  this.dataService.getUpdates(this.curIcon);
         
         data.map(d => d.date = new Date(d.date))
@@ -370,7 +378,7 @@ export class LiveChartComponent {
     
 
     var yAxis = d3.axisLeft(chartProps.y)
-    .ticks(0.5)
+    .ticks(3)
     .tickSizeInner(-width)
     .tickSizeOuter(0);
   
@@ -735,7 +743,7 @@ export class LiveChartComponent {
     }
 
     var yAxis = d3.axisLeft(chartProps.y)
-    .ticks(0.5)
+    .ticks(3)
     .tickSizeInner(-width)
     .tickSizeOuter(0);
   
@@ -747,7 +755,6 @@ export class LiveChartComponent {
           return chartProps.x(d.date.getTime());
       })
       .y(function (d: BrainSensorData) { 
-        console.log("graphNumber: " + graphNumber + " d: " + JSON.stringify(d));
         switch(graphNumber) {
           case 1: 
             return chartProps.y(d.TP9);
@@ -1007,7 +1014,7 @@ export class LiveChartComponent {
     //   // .tickSizeInner(-height)
     //   // .tickSizeOuter(0);
     var yAxis = d3.axisLeft(this.chartProps.y)
-    .ticks(5)
+    .ticks(3)
     .tickSizeInner(-width)
     .tickSizeOuter(0);
   
@@ -1063,7 +1070,7 @@ export class LiveChartComponent {
   svg.append("g")
   .attr("class", "x axis")
   .attr("transform", "translate(0," + height + ")")
-  .call(xAxis.ticks(5))
+  .call(xAxis.ticks(3))
   // selects all of the individual tick-and-label groups that were created by the "xAxis" function above
   .selectAll("g")
   // to each tick-and-label group we append an html which is a 'foreign object'
@@ -1158,9 +1165,11 @@ export class LiveChartComponent {
 
   removeChart(graphNumber: number) {
     const chartContainer = document.getElementById(`chart-${graphNumber}`);
-    if (chartContainer && chartContainer.parentNode)
+    if (chartContainer && chartContainer.parentNode === this.chartElement.nativeElement) {
       this.chartElement.nativeElement.removeChild(chartContainer);
+    }
   }
+  
 
   removeAllCharts() {
     for (let i = 0; i < 7; ++i) {
@@ -1224,7 +1233,7 @@ export class LiveChartComponent {
     var tw = 100;
     // Select the x-axis element and all foreign objects appended to ticks
     this.chartProps.svg.select('.x.axis')
-    .call(this.chartProps.xAxis.ticks(5))
+    .call(this.chartProps.xAxis.ticks(3))
     .selectAll("g")
     .selectAll(".my-x-axis-label") // select all existing tick labels
     .data(function(d, i) { return [d]; }) // bind the data to the selection
@@ -1347,7 +1356,7 @@ export class LiveChartComponent {
       var tw = 100;
       // Select the x-axis element and all foreign objects appended to ticks
       chartProps.svg.select('.x.axis')
-        .call(chartProps.xAxis.ticks(5))
+        .call(chartProps.xAxis.ticks(3))
         .selectAll("g")
         .selectAll(".my-x-axis-label") // select all existing tick labels
         .data(function(d, i) { return [d]; }) // bind the data to the selection
@@ -1478,7 +1487,7 @@ export class LiveChartComponent {
     var tw = 100;
     // Select the x-axis element and all foreign objects appended to ticks
     chartProps.svg.select('.x.axis')
-      .call(chartProps.xAxis.ticks(5))
+      .call(chartProps.xAxis.ticks(3))
       .selectAll("g")
       .selectAll(".my-x-axis-label") // select all existing tick labels
       .data(function(d, i) { return [d]; }) // bind the data to the selection

@@ -3,7 +3,6 @@ import {HttpClient} from '@angular/common/http';
 import { Subject, from } from  'rxjs';
 import { io, Socket } from "socket.io-client";
 import { HeartSkinRateData } from 'HeartSkinRateData';
-import { DataPoint } from 'DataPoint';
 import { BrainSensorData } from 'BrainSensorData';
 import { IMUSensorData } from 'IMUSensorData';
 
