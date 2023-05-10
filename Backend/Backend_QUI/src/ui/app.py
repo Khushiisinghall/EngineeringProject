@@ -22,11 +22,13 @@ def data_sender():
         sensor_data = ser.readline().decode()
         if mode_status=="real-time":
             sender(data=sensor_data, userID=userID)
-            # eeg_sender(userID=userID)
-        elif mode_status=="batch":
-            finished=sender_batch(data=sensor_data, userID=userID)
-            if finished:
-                stop_data_sender_thread()
+()
+def muse_data_sender():
+    while not stop_event.is_set():
+    # receive data from serial port and log it
+        if mode_status=="real-time":
+             eeg_sender(userID=userID)
+
 
         
 def toggle_disabled(real_var,batch_var):
@@ -49,7 +51,10 @@ def run():
             stop_button.config(bg="white")
             command_sender(ser=ser,cmd=START_COMMAND)
             data_sender_thread = threading.Thread(target=data_sender,)
-            data_sender_thread.start()    
+            muse_sender_thread = threading.Thread(target=muse_data_sender,)
+            data_sender_thread.start()  
+            muse_sender_thread.start()
+  
     def stop():
         canvas.itemconfig(circle, fill="red")
         start_button.config(bg="white")
@@ -75,6 +80,14 @@ def run():
             mode_status="batch"
         else:
             batch_var.set(0)
+    def toggle_muse():
+        if muse_var.get()==1:
+            print("Muse data is selected.")
+            global muse_status
+            mode_status="send"
+        else:
+            muse_var.set(0)            
+            mode_status="dont send"
 
 
     def toggle_real_time():
@@ -98,11 +111,14 @@ def run():
     save_button = tk.Button(master=window, text="Save",command=getuser_entry)
     batch_var = tk.BooleanVar(value=False)
     real_var = tk.BooleanVar(value=False)
+    muse_var=tk.BooleanVar(value=False)
     # Create start/stop/pause buttons
     start_button = tk.Button(master=window, text="START", command=start,height=2,width=6)
     stop_button = tk.Button(master=window, text="STOP", command=stop,height=2,width=6)
     batch_button=tk.Checkbutton(master=window,text="Batch",variable=batch_var,command=toggle_batch)
     real_button=tk.Checkbutton(master=window,text="Real-Time",variable=real_var ,command=toggle_real_time)
+    muse_button=tk.Checkbutton(master=window,text="Muse",variable=muse_var,command=toggle_muse)
+
     # ading to windows
     name_label.place(relx=0.4,rely=0.15)
     user_label.place(relx=0.3,rely=0.3)
@@ -111,8 +127,9 @@ def run():
 
     start_button.place(relx=0.37,rely=0.4)
     stop_button.place(relx=0.54,rely=0.4)
-    batch_button.place(relx=0.75,rely=0.4)
+    # batch_button.place(relx=0.75,rely=0.4)
     real_button.place(relx=0.75,rely=0.45)
+    muse_button.place(relx=0.75,rely=0.3)
     # Create canvas for status circle
     canvas = tk.Canvas(master=window, width=80, height=80)
     canvas.place(relx=0.44,rely=0.65)
