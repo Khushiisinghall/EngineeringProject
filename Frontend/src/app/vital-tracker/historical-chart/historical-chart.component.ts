@@ -1,12 +1,20 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import * as d3 from 'd3';
 import { Subscription } from 'rxjs';
+<<<<<<< HEAD
+import { LiveService } from 'src/app/services/live.service';
+import { DataService } from 'src/app/services/data.service';
+=======
 import { DataService } from 'src/app/vital-tracker/services/dataservice/data.service';
+>>>>>>> origin/dev
 import { HeartSkinRateData } from 'HeartSkinRateData';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BrainSensorData } from 'BrainSensorData';
 import { IMUSensorData } from 'IMUSensorData';
+<<<<<<< HEAD
+=======
 import { LiveService } from '../services/liveservice/live.service';
+>>>>>>> origin/dev
 
 @Component({
   selector: 'app-historical-chart',
@@ -335,7 +343,11 @@ export class HistoricalChartComponent {
 
     
 
+<<<<<<< HEAD
+    let colors = ['blue','green', 'pink'];
+=======
     let colors = ['blue','green', 'black'];
+>>>>>>> origin/dev
     // Define one line for each axis
     var valueLines: any[] = [];
     for (let i = 0; i < this.imuAxes.length; ++i) {
@@ -415,6 +427,23 @@ export class HistoricalChartComponent {
           }
          }))]);  
   
+<<<<<<< HEAD
+    // Add the valueline2 path.
+    // svg.append('path')
+    //   .attr('class', 'line line2')
+    //   .style('stroke', 'green')
+    //   .style('fill', 'none')
+    //   .attr('d', valueline2(_this.marketStatusToPlot));
+  
+    // Add the valueline path.
+    // svg.append('path')
+    //   .attr('class', 'line line1')
+    //   .style('stroke', color)
+    //   .style('fill', 'none')
+    //   .attr('d', valueline(_this.dataToPlot));
+
+=======
+>>>>>>> origin/dev
 
     for (let i = 0; i < valueLines.length; ++i) {
       valueLine = valueLines[i]
@@ -425,6 +454,26 @@ export class HistoricalChartComponent {
           .style('fill', 'none')
           .attr('d', valueLine(_this.dataToPlot));
     }
+<<<<<<< HEAD
+    // svg.append('path')
+    //       .attr('class', `line line1`)
+    //       .style('stroke', colors[coordinate-1])
+    //       .style('fill', 'none')
+    //       .attr('d', valueline(_this.dataToPlot));
+
+    // svg.append('path')
+    //       .attr('class', `line line2`)
+    //       .style('stroke', colors[coordinate2-1])
+    //       .style('fill', 'none')
+    //       .attr('d', valueline2(_this.dataToPlot));
+
+    // svg.append('path2')
+    // .attr('class', `line line${2}`)
+    // .style('stroke', colors[coordinate-1])
+    // .style('fill', 'none')
+    // .attr('d', valueline2(_this.dataToPlot));
+=======
+>>>>>>> origin/dev
 
 
     // Define the x axis with a custom tick format function
@@ -518,8 +567,13 @@ export class HistoricalChartComponent {
         switch(graphNumber) {
           case 1: 
             var text = [`<span style="color:${colors[0]};"> X: <span style="color:black;"> ` + d.acceleration[0] + "<br>",
+<<<<<<< HEAD
+                        `<span style="color:${colors[1]};"> Y: <span style="color:black;"> ` + d.acceleration[0] + "<br>",
+                        `<span style="color:${colors[2]};"> Z: <span style="color:black;"> ` + d.acceleration[0] + "<br>"
+=======
                         `<span style="color:${colors[1]};"> Y: <span style="color:black;"> ` + d.acceleration[1] + "<br>",
                         `<span style="color:${colors[2]};"> Z: <span style="color:black;"> ` + d.acceleration[2] + "<br>"
+>>>>>>> origin/dev
                        ]
 
             tooltip.html(_this.imuAxes.reduce((result, coordinate) => result + text[coordinate-1], '')+ "Time: " + d3.timeFormat('%H:%M:%S')(d.date))
@@ -542,8 +596,13 @@ export class HistoricalChartComponent {
             break;
           case 2: 
             var text = [`<span style="color:${colors[0]};"> X: <span style="color:black;"> ` + d.orientation[0] + "<br>",
+<<<<<<< HEAD
+                        `<span style="color:${colors[1]};"> Y: <span style="color:black;"> ` + d.orientation[0] + "<br>",
+                        `<span style="color:${colors[2]};"> Z: <span style="color:black;"> ` + d.orientation[0] + "<br>"
+=======
                         `<span style="color:${colors[1]};"> Y: <span style="color:black;"> ` + d.orientation[1] + "<br>",
                         `<span style="color:${colors[2]};"> Z: <span style="color:black;"> ` + d.orientation[2] + "<br>"
+>>>>>>> origin/dev
                        ]
             tooltip.html(_this.imuAxes.reduce((result, coordinate) => result + text[coordinate-1], '')+ "Time: " + d3.timeFormat('%H:%M:%S')(d.date))
             .style('left', (event.pageX-275) + 'px')
@@ -560,8 +619,13 @@ export class HistoricalChartComponent {
             break;
           case 3: 
             var text = [`<span style="color:${colors[0]};"> X: <span style="color:black;"> ` + d.magnetic[0] + "<br>",
+<<<<<<< HEAD
+                        `<span style="color:${colors[1]};"> Y: <span style="color:black;"> ` + d.magnetic[0] + "<br>",
+                        `<span style="color:${colors[2]};"> Z: <span style="color:black;"> ` + d.magnetic[0] + "<br>"
+=======
                         `<span style="color:${colors[1]};"> Y: <span style="color:black;"> ` + d.magnetic[1] + "<br>",
                         `<span style="color:${colors[2]};"> Z: <span style="color:black;"> ` + d.magnetic[2] + "<br>"
+>>>>>>> origin/dev
                       ]
             tooltip.html(_this.imuAxes.reduce((result, coordinate) => result + text[coordinate-1], '')+ "Time: " + d3.timeFormat('%H:%M:%S')(d.date))
             .style('left', (event.pageX-275) + 'px')
@@ -578,8 +642,13 @@ export class HistoricalChartComponent {
             break;
           case 4:
             var text = [`<span style="color:${colors[0]};"> X: <span style="color:black;"> ` + d.gyro[0] + "<br>",
+<<<<<<< HEAD
+                        `<span style="color:${colors[1]};"> Y: <span style="color:black;"> ` + d.gyro[0] + "<br>",
+                        `<span style="color:${colors[2]};"> Z: <span style="color:black;"> ` + d.gyro[0] + "<br>"
+=======
                         `<span style="color:${colors[1]};"> Y: <span style="color:black;"> ` + d.gyro[1] + "<br>",
                         `<span style="color:${colors[2]};"> Z: <span style="color:black;"> ` + d.gyro[2] + "<br>"
+>>>>>>> origin/dev
                        ]
             tooltip.html(_this.imuAxes.reduce((result, coordinate) => result + text[coordinate-1], '')+ "Time: " + d3.timeFormat('%H:%M:%S')(d.date))
             .style('left', (event.pageX-275) + 'px')
@@ -596,8 +665,13 @@ export class HistoricalChartComponent {
             break;
           case 5:
             var text = [`<span style="color:${colors[0]};"> X: <span style="color:black;"> ` + d.linear[0] + "<br>",
+<<<<<<< HEAD
+                        `<span style="color:${colors[1]};"> Y: <span style="color:black;"> ` + d.linear[0] + "<br>",
+                        `<span style="color:${colors[2]};"> Z: <span style="color:black;"> ` + d.linear[0] + "<br>"
+=======
                         `<span style="color:${colors[1]};"> Y: <span style="color:black;"> ` + d.linear[1] + "<br>",
                         `<span style="color:${colors[2]};"> Z: <span style="color:black;"> ` + d.linear[2] + "<br>"
+>>>>>>> origin/dev
                        ]
             tooltip.html(_this.imuAxes.reduce((result, coordinate) => result + text[coordinate-1], '')+ "Time: " + d3.timeFormat('%H:%M:%S')(d.date))
             .style('left', (event.pageX-275) + 'px')
@@ -614,8 +688,13 @@ export class HistoricalChartComponent {
             break;
           case 6:
             var text = [`<span style="color:${colors[0]};"> X: <span style="color:black;"> ` + d.gravity[0] + "<br>",
+<<<<<<< HEAD
+                        `<span style="color:${colors[1]};"> Y: <span style="color:black;"> ` + d.gravity[0] + "<br>",
+                        `<span style="color:${colors[2]};"> Z: <span style="color:black;"> ` + d.gravity[0] + "<br>"
+=======
                         `<span style="color:${colors[1]};"> Y: <span style="color:black;"> ` + d.gravity[1] + "<br>",
                         `<span style="color:${colors[2]};"> Z: <span style="color:black;"> ` + d.gravity[2] + "<br>"
+>>>>>>> origin/dev
                        ]
             tooltip.html(_this.imuAxes.reduce((result, coordinate) => result + text[coordinate-1], '')+ "Time: " + d3.timeFormat('%H:%M:%S')(d.date))
             .style('left', (event.pageX-275) + 'px')
@@ -764,6 +843,15 @@ export class HistoricalChartComponent {
           }
          }))]);  
   
+<<<<<<< HEAD
+    // Add the valueline2 path.
+    // svg.append('path')
+    //   .attr('class', 'line line2')
+    //   .style('stroke', 'green')
+    //   .style('fill', 'none')
+    //   .attr('d', valueline2(_this.marketStatusToPlot));
+=======
+>>>>>>> origin/dev
   
     // Add the valueline path.
     svg.append('path')
@@ -926,6 +1014,199 @@ export class HistoricalChartComponent {
         .attr('fill', color);      
   }
 
+<<<<<<< HEAD
+  // buildLastMuseChartComponent(graphNumber: number, color: string) {
+  //   const chartId = `chart-${graphNumber}`;
+  //   const chartContainer = document.createElement('div');
+  //   chartContainer.setAttribute('id', chartId);
+  //   this.chartElement.nativeElement.appendChild(chartContainer);
+
+  //   this.chartProps = {};
+  //   this.formatDate();
+  
+  //   // Set the dimensions of the canvas / graph
+  //   var margin = { top: 10, right: 0, bottom: 40, left: 200 },
+  //     width = 1000 - margin.left - margin.right,
+  //     height = 120 - margin.top - margin.bottom;
+  
+  //   // Set the ranges
+  //   this.chartProps.x = d3.scaleLinear().range([0, width]);
+  //   this.chartProps.y = d3.scaleLinear().range([height, 0]);
+  
+  //   // Define the axes
+  //   var xAxis = d3.axisBottom(this.chartProps.x)
+  //     // .tickSizeInner(-height)
+  //     // .tickSizeOuter(0);
+  //   var yAxis = d3.axisLeft(this.chartProps.y)
+  //   .ticks(2)
+  //   .tickSizeInner(-width)
+  //   .tickSizeOuter(0);
+  
+
+
+  //   let _this = this;
+  
+  //   // Define the line
+  //   var valueline = d3.line<HeartRateData>()
+  //     .x(function (d: HeartRateData) {
+  //         return _this.chartProps.x(d.date.getTime());
+  //     })
+  //     .y(function (d: HeartRateData) { 
+  //       return _this.chartProps.y(d.rate); 
+  //     });
+  
+  //   // Define the line
+  //   // var valueline2 = d3.line<MarketPrice>()
+  //   //   .x(function (d) {
+  //   //     if (d.date instanceof Date) {
+  //   //       return _this.chartProps.x(d.date.getTime());
+  //   //     }
+  //   //   })
+  //   //   .y(function (d) { console.log('Open market'); return _this.chartProps.y(d.open); });
+  
+  //   var svg = d3.select(`#${chartId}`)
+  //     .append('svg')
+  //     .attr('width', width + margin.left + margin.right)
+  //     .attr('height', height + margin.top + margin.bottom)
+  //     .append('g')
+  //     .attr('transform', `translate(${margin.left},${margin.top})`);
+  
+  //   // Scale the range of the data
+  //   this.chartProps.x.domain(
+  //     [Math.min.apply(Math, _this.dataToPlot.map(function(o) { return o.date.getTime(); })), 
+  //       Math.max.apply(Math, this.dataToPlot.map(function(o) { return o.date.getTime(); }))]);  
+
+  //   this.chartProps.y.domain(
+  //     [Math.min(0, Math.min.apply(Math, _this.dataToPlot.map(function(o) { return o.rate; }))), 
+  //       Math.max.apply(Math, this.dataToPlot.map(function(o) { return o.rate; }))]);  
+  
+  //   // Add the valueline2 path.
+  //   // svg.append('path')
+  //   //   .attr('class', 'line line2')
+  //   //   .style('stroke', 'green')
+  //   //   .style('fill', 'none')
+  //   //   .attr('d', valueline2(_this.marketStatusToPlot));
+  
+  //   // Add the valueline path.
+  //   svg.append('path')
+  //     .attr('class', 'line line1')
+  //     .style('stroke', color)
+  //     .style('fill', 'none')
+  //     .attr('d', valueline(_this.dataToPlot));
+  
+  
+  //   // Define the x axis with a custom tick format function
+  //   var xAxis = d3.axisBottom(this.chartProps.x)
+  //   .tickFormat(function (d, i) {
+  //     return '';
+  //   });
+
+  //   var tx = -25;
+  //   var ty = -18;
+  //   var tw = 100;
+  //   var th = 200;
+
+  //   // Add the X Axis
+  // svg.append("g")
+  // .attr("class", "x axis")
+  // .attr("transform", "translate(0," + height + ")")
+  // .call(xAxis)
+  // .selectAll("g")
+  // .append("svg:foreignObject")
+  // .attr("width", tw)
+  // .attr("height", 60)
+  // .attr("x", tx)
+  // .attr("y", ty)
+  // .append("xhtml:div")
+  // .attr("class", "my-x-axis-label")
+  // .html(function(d, i) {
+  //   var timeDiv = '<span class="tick-time">' + d3.timeFormat('%H:%M:%S')(new Date(d)) + '</span>';
+
+  //   // Check if the current tick value is the first or last value, or if the date has changed
+  //   if (i === 0 || i === _this.dataToPlot.length - 1 || _this.dataToPlot[i].date.getDate() !== _this.dataToPlot[i - 1].date.getDate()) {
+  //     var dateDiv = '<span class="tick-date">' + d3.timeFormat('%Y-%m-%d')(new Date(d)) + '</span>';
+  //     return '<div class = "tick-value">' + dateDiv + '<br>' + timeDiv + '</div>';
+  //   } else {
+  //     return '<div class = "tick-value">' + '<br>' + timeDiv + '</div>';
+  //   }
+  // });
+
+  
+  //   // Add the Y Axis
+  //   svg.append('g')
+  //   .attr('class', 'grid')
+  //   .call(yAxis);
+
+  //   //hovering
+  //   var tooltip = d3.select(`#${chartId}`)
+  //   .append('div')
+  //   .attr('class', 'tooltip')
+  //   .style('position', 'absolute')
+  //   .style('border', '1px solid black')
+  //   .style('border-radius', '5px');
+
+  //   var tooltipCircle = svg
+  //   .append('circle')
+  //   .attr("class", "tooltip-circle")
+  //   .attr("r", 5)
+  //   .style("fill", "steelblue")
+  //   .style("opacity", 0);
+
+  //     // Select all elements with class "line" and add a mouseover event listener
+  //     d3.select(`#${chartId}`)
+  //     .on('mouseover', function () {
+  //       // Set the opacity of the tooltip to 1 (i.e. make it visible)
+  //       tooltip.style('opacity', 1);
+  //     })
+  //     .on('mousemove', function (event) {
+  //       tooltip.style('opacity', 1);
+
+  //       // Get the x and y coordinates of the mouse pointer relative to the SVG element
+  //       var mouseX = d3.pointer(event)[0];
+  //       var mouseY = d3.pointer(event)[1];
+  //       var mouseX = d3.pointer(event)[0] ;
+  //       var mouseY = d3.pointer(event)[1];
+  //       var minValuex = Math.min.apply(Math, _this.dataToPlot.map(function(o) { return o.date.getTime(); }));
+
+  //       // Convert the x and y coordinates of the mouse pointer to their corresponding data values on the chart
+  //       var x0 = _this.chartProps.x.invert(mouseX-198);
+  //       const i = closestIndex(x0, _this.dataToPlot);
+
+  //       var d = _this.dataToPlot[i];
+
+  //       // Set the content and position of the tooltip based on the closest data point to the x value of the mouse pointer
+  //       tooltip.html('Value: ' + d.rate + "<br>" + "Time: " + d3.timeFormat('%H:%M:%S')(d.date))
+  //         .style('left', (event.pageX-275) + 'px')
+  //         .style('top', (event.pageY -135) + 'px');
+        
+  //       tooltip.style('opacity', 1);  
+
+  //       tooltipCircle
+  //       .attr("cx", _this.chartProps.x(d.date.getTime()))
+  //       .attr("cy", _this.chartProps.y(d.rate))
+  //       .style("opacity", 1);
+  //     })
+  //     .on('mouseout', function () {
+  //       // Set the opacity of the tooltip back to 0 (i.e. hide it)
+  //       tooltip.style('opacity', 0);
+  //     })
+
+      
+  
+  //   // Setting the required objects in chartProps so they could be used to update the chart
+  //   // this.chartProps.svg = svg;
+  //   // this.chartProps.valueline = valueline;
+  //   // this.chartProps.tooltip = tooltip;
+  //   // this.chartProps.tooltipCicle = tooltipCircle
+  //   // this.chartProps.margin = margin;
+  //   // // this.chartProps.valueline2 = valueline2;
+  //   // this.chartProps.xAxis = xAxis;
+  //   // this.chartProps.yAxis = yAxis;
+  // }
+
+
+=======
+>>>>>>> origin/dev
 
 
 
@@ -989,6 +1270,15 @@ export class HistoricalChartComponent {
       [Math.min(0, Math.min.apply(Math, _this.dataToPlot.map(function(o) { return o.rate; }))), 
         Math.max.apply(Math, this.dataToPlot.map(function(o) { return o.rate; }))]);  
   
+<<<<<<< HEAD
+    // Add the valueline2 path.
+    // svg.append('path')
+    //   .attr('class', 'line line2')
+    //   .style('stroke', 'green')
+    //   .style('fill', 'none')
+    //   .attr('d', valueline2(_this.marketStatusToPlot));
+=======
+>>>>>>> origin/dev
   
     // Add the valueline path.
     svg.append('path')
@@ -1124,8 +1414,44 @@ export class HistoricalChartComponent {
       this.removeAllCharts();
     }
     this.buildChart();
+<<<<<<< HEAD
+    // let _this = this;
+    // // Scale the range of the data again
     
 
+    // // Scale the range of the data
+    // this.chartProps.x.domain(
+    //   [Math.min.apply(Math, _this.dataToPlot.map(function(o) { return o.date.getTime(); })), 
+    //     Math.max.apply(Math, this.dataToPlot.map(function(o) { return o.date.getTime(); }))]);  
+
+    // this.chartProps.y.domain(
+    //   [Math.min(0, Math.min.apply(Math, _this.dataToPlot.map(function(o) { return o.rate; }))), 
+    //     Math.max.apply(Math, this.dataToPlot.map(function(o) { return o.rate; }))]); 
+
+    // // Select the section we want to apply our changes to
+    // this.chartProps.svg.transition();
+
+
+    // // Make the changes to the line chart
+    // this.chartProps.svg.select('.line.line1') // update the line
+    //   .attr('d', this.chartProps.valueline(this.dataToPlot));
+  
+    // // this.chartProps.svg.select('.line.line2') // update the line
+    // //   .attr('d', this.chartProps.valueline2(this.marketStatusToPlot));
+  
+    // this.chartProps.svg.select('.x.axis') // update x axis
+    //   .call(this.chartProps.xAxis);
+  
+    // this.chartProps.svg.select('.y.axis') // update y axis
+    //   .call(this.chartProps.yAxis);
+
+
+    // this.chartProps.svg.select('path').style('stroke', this.curColor)
+
+=======
+    
+
+>>>>>>> origin/dev
 }
 
 }

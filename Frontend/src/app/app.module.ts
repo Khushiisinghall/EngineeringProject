@@ -32,6 +32,10 @@ import { Criteria_Catalogue } from './x_models/criteria_catalogue';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SchedulerComponent } from './scheduler/scheduler.component';
 import { ASP } from './x_models/asp.model';
+<<<<<<< HEAD
+import { VitalTrackerComponent } from './vital-tracker/vital-tracker/vital-tracker.component';
+=======
+>>>>>>> origin/dev
 import { HeaderComponent } from './vital-tracker/header/header.component';
 import { ButtonComponent } from './vital-tracker/vital_button/vital_button.component';
 import { AboutComponent } from './vital-tracker/about/about.component';
@@ -80,6 +84,10 @@ import { UpdatepopupComponent } from './vital-tracker/updatepopup/updatepopup.co
     LiveChartComponent,
     IconsComponent,
     HistoricalChartComponent,
+<<<<<<< HEAD
+    VitalTrackerComponent,
+=======
+>>>>>>> origin/dev
     DateTimePickerButtonComponent,
     DateTimePickerDialogComponent,
     ImuDropdownComponent,

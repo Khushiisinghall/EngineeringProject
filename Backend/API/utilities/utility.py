@@ -7,30 +7,27 @@ Date: April 22, 2023
 import serial
 from model.models  import *
 import requests
-# from pylsl import StreamInlet, resolve_byprop
+from pylsl import StreamInlet, resolve_byprop
 from utilities.constants import *
 import serial.tools.list_ports
 
-# def EEG():
-#     streams = resolve_byprop('type', 'EEG', timeout=LSL_SCAN_TIMEOUT)
-#     if len(streams) == 0:
-#         raise(RuntimeError("Can't find EEG stream."))
-#     else:
-#         inlet = StreamInlet(streams[0], max_chunklen=LSL_EEG_CHUNK)
-#         sample=inlet.pull_sample()
-#         return sample
+def EEG():
+    streams = resolve_byprop('type', 'EEG', timeout=LSL_SCAN_TIMEOUT)
+    if len(streams) == 0:
+        raise(RuntimeError("Can't find EEG stream."))
+    else:
+        inlet = StreamInlet(streams[0], max_chunklen=LSL_EEG_CHUNK)
+        sample=inlet.pull_sample()
+        return sample
 
-# def eeg_sender(userID):
-#     sample=EEG()
-#     brain_pack=brain_sensor_reader(data=sample,userID=userID)
-#     r=requests.post(url_brain_sensor, brain_pack)
-#     if r.status_code == 200:  # check if the request was successful
-#         print(f"Brain  rate sent successfully:{brain_pack}")
-#     else:
-#         print(f"Error sending heart rate: {r.status_code}")
-
-
-
+def eeg_sender(userID):
+    sample=EEG()
+    brain_pack=brain_sensor_reader(data=sample,userID=userID)
+    r=requests.post(url_brain_sensor, brain_pack)
+    if r.status_code == 200:  # check if the request was successful
+        print(f"Brain  rate sent successfully:{brain_pack}")
+    else:
+        print(f"Error sending heart rate: {r.status_code}")
 # # Open a serial connection to the Arduino
 def serial_connection(port_name:str,baudrate=115200):
     ser = serial.Serial(port_name,baudrate=baudrate) 

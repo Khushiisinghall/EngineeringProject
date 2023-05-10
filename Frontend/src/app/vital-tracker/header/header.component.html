@@ -1,15 +1,15 @@
 <header class="header-user-dropdown">
   <div class="header-limiter">
     <h1>
-      <a href="#">Vit-Track</a>
+      <a style="font-size: 40px" [routerLink]="['/vit-track', 'Sensors']" routerLinkActive="active" href="#">Vit-Track</a>
     </h1>
 
     <nav>
-      <a [routerLink]="['/vit-track', 'Sensors']" routerLinkActive="active">Sensors</a>
-      <a [routerLink]="['/vit-track', 'LiveReport']" routerLinkActive="active">Live Report</a>
-      <a [routerLink]="['/vit-track', 'HistoricalReport']" routerLinkActive="active">Historical Reports</a>
-      <a [routerLink]="['/vit-track', 'user']" *ngIf="isadmin" routerLinkActive="active">User</a>
-      <a [routerLink]="['/vit-track', 'login']" routerLinkActive="active">Logout</a>
+      <a style="font-size: 18px" [routerLink]="['/vit-track', 'Sensors']" routerLinkActive="active">Sensors</a>
+      <a style="font-size: 18px" [routerLink]="['/vit-track', 'LiveReport']" routerLinkActive="active">Live Report</a>
+      <a style="font-size: 18px" [routerLink]="['/vit-track', 'HistoricalReport']" routerLinkActive="active">Historical Reports</a>
+      <a style="font-size: 18px" [routerLink]="['/vit-track', 'user']" *ngIf="isadmin" routerLinkActive="active">User</a>
+      <a style="font-size: 18px" [routerLink]="['/vit-track', 'login']" routerLinkActive="active">Logout</a>
       <!-- <a href="#">Evaluation</a> -->
       <!-- <a href="#">Roles <span class="header-new-feature">new</span></a> -->
     </nav>
