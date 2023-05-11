@@ -17,6 +17,6 @@ with open("../assest/imu_sensor.json", "r") as f:
 for hr in skin_sensor:
     hr_date = datetime.fromisoformat(hr["date"])
     r = requests.post(url, json=hr)
-    if hr_date > threshold_date:
-    	time.sleep(0.05)  
+    # if hr_date > threshold_date:
+    #	time.sleep(0.05)  
     print("Posted:", hr)

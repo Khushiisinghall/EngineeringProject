@@ -686,18 +686,29 @@ export class LiveChartComponent {
         tooltip.style('opacity', 0);
       })
 
-      const titleGroup = svg.append('g')
-        .attr('transform', `translate(-60,${margin.top+40})`);
-
       const titles = ['Acceleration', 'Orientation', 'Magnetic', 'Gyro', 'Linear', 'Gravity'];
       var size = '21px';
-      if (graphNumber == 1)
+      var titleGroup;
+      if (graphNumber == 1 || graphNumber ==2) 
         size = '18px';
+      if (graphNumber ==2 || graphNumber ==3) { 
+        titleGroup = svg.append('g')
+          .attr('transform', `translate(-70,${margin.top+40})`);
+      }
+      if (graphNumber == 1) {
+        titleGroup = svg.append('g')
+          .attr('transform', `translate(-76,${margin.top+40})`);
+      }
+      if (graphNumber == 4 || graphNumber == 5 || graphNumber == 6) { 
+        titleGroup = svg.append('g')
+          .attr('transform', `translate(-60,${margin.top+40})`);
+      }
+
       titleGroup.append('text')
         .text(titles[graphNumber-1])
         .attr('text-anchor', 'middle')
         .attr('alignment-baseline', 'hanging')
-        .attr('font-size', size);   
+        .attr('font-size', size); 
 
   
     // Setting the required objects in chartProps so they could be used to update the chart
