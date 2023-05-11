@@ -14,6 +14,7 @@ export class AuthService {
   hardwareapiurl='';
 
   RegisterUser(inputdata:any){
+    console.log("Registering user")
     return this.http.post(this.mongourl,inputdata)
   }
   GetUserbyCode(username:any){

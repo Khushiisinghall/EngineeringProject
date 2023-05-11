@@ -18,13 +18,16 @@ export class DateTimePickerDialogComponent {
   seconds: true;
   title = 'datetimepicker';
   constructor(
-        private dialogRef: MatDialogRef<DateTimePickerDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: any, 
-        @Inject(LiveService) private liveService:LiveService, 
-        private formBuilder: FormBuilder) {
-    console.log("HII" + data.min);
+    private dialogRef: MatDialogRef<DateTimePickerDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(LiveService) private liveService: LiveService,
+    private formBuilder: FormBuilder
+  ) {
+    // Set initial value for datetimeCtrl form control
+    const initialDateTime = moment(this.liveService.getMin()); // Set your desired initial date and time
+    console.log("init: " + initialDateTime);
     this.group = this.formBuilder.group({
-      datetimeCtrl: ['', Validators.required]
+      datetimeCtrl: [initialDateTime, Validators.required]
     });
   }
 
@@ -42,12 +45,5 @@ export class DateTimePickerDialogComponent {
     this.dialogRef.close(formattedDateTime);
   }
 
-  // onDateTimePickerChange(event: MatDatetimepickerToggleChange<any>): void {
-  //   if (event.value && event.value.length > 0) {
-  //     this.group.patchValue({ datetimeCtrl: moment(event.value[0]) });
-  //   } else {
-  //     this.group.patchValue({ datetimeCtrl: null });
-  //   }
-  // }
 
 }

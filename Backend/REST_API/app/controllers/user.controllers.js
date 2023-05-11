@@ -8,7 +8,6 @@ exports.create = (req, res) => {
     res.status(400).send({ message: "Please provide all required fields!" });
     return;
   }
-
   // Create a new User
   const user = new User({
     username:req.body.username,

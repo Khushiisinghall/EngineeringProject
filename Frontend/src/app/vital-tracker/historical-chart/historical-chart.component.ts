@@ -196,24 +196,15 @@ export class HistoricalChartComponent {
           this.data = data;
           this.dataToPlot = data;
           this.min = this.findExtremeDate(data, true);
-          // first case, now start/end point set yet, so set to min/max
-          if (typeof this.liveService.getStartTime() == 'undefined' || this.liveService.getStartTime() == null) {
-            this.startTime = this.min;
-            this.liveService.setStartTime(this.min);
-          }
-          else {
-            this.startTime = this.liveService.getStartTime();
-          }
+          
+          this.startTime = this.min;
+          this.liveService.setStartTime(this.min);
+         
           this.max = this.findExtremeDate(data, false);
-          if (typeof this.liveService.getEndTime() == 'undefined' || this.liveService.getEndTime() == null) {
-            this.endTime = this.max;
-            this.liveService.setEndTime(this.max);
-          }
-          else {
-            this.endTime = this.liveService.getEndTime();
-          }
-          this.liveService.setMin(this.min);
-          this.liveService.setMax(this.max);
+          this.endTime = this.max;
+          this.liveService.setEndTime(this.max);
+         
+          this.liveService.changeMinMax(this.min, this.max);
 
           this.filter_dataToPlot();
           if (!isInitial) {

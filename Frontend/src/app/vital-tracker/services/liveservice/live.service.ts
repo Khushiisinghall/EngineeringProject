@@ -19,6 +19,9 @@ export class LiveService {
 
   private min: Date;
   private max: Date;
+  private minSubject = new Subject<any>();
+  private maxSubject = new Subject<any>();
+
 
   private museSelected: number[] = [1, 2, 3, 4, 5];//['TP9', 'AF7','AF8','TP10','RightAUX']
   private museSubject = new Subject<any>();
@@ -159,6 +162,13 @@ export class LiveService {
     console.log("This is from the Live Service! " + timeStr +" is " + time);
   }
 
+  changeMinMax(min: Date, max: Date) {
+    this.min = min;
+    this.max = max;
+    this.minSubject.next(this.min);
+    this.maxSubject.next(this.max);
+  }
+
   getCurrentTitle() {
     return this.curTitle;
   }
@@ -240,4 +250,13 @@ export class LiveService {
   getMax() {
     return this.max;
   }
+
+  onMinChange(): Observable<any> {
+    return this.minSubject.asObservable();
+  }
+
+  onMaxChange(): Observable<any> {
+    return this.maxSubject.asObservable();
+  }
+  
 }
