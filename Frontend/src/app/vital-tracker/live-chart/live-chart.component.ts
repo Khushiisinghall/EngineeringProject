@@ -221,7 +221,6 @@ export class LiveChartComponent {
         // first disconnect socket if still active
         if (this.updates)
           this.updates.disconnectSocket();
-        console.log("Calling getUpdates");
         this.updates =  this.dataService.getUpdates(this.curIcon);
         
         data.map(d => d.date = new Date(d.date))
@@ -355,7 +354,15 @@ export class LiveChartComponent {
     const chartContainer = document.createElement('div');
     chartContainer.setAttribute('id', chartId);
     this.chartElement.nativeElement.appendChild(chartContainer);
-
+    if (this.dataToPlot[0] == undefined)
+      return;
+    if ((this.dataToPlot[0] as IMUSensorData).acceleration == undefined
+        || (this.dataToPlot[0] as IMUSensorData).orientation == undefined
+        || (this.dataToPlot[0] as IMUSensorData).magnetic == undefined
+        || (this.dataToPlot[0] as IMUSensorData).gyro == undefined
+        || (this.dataToPlot[0] as IMUSensorData).linear == undefined
+        || (this.dataToPlot[0] as IMUSensorData).gravity == undefined)
+          return;
 
     var chartProps: any = {};
     this.formatDate();
@@ -503,7 +510,8 @@ export class LiveChartComponent {
     .attr("class", "my-x-axis-label")
     .html(function(d, i) {
       var timeDiv = '<span class="tick-time">' + d3.timeFormat('%H:%M:%S')(new Date(d)) + '</span>';
-
+      if (_this.dataToPlot[i] == undefined)
+        return '';
       // Check if the current tick value is the first or last value, or if the date has changed
       if (i === 0 || i === _this.dataToPlot.length - 1 || _this.dataToPlot[i].date.getDate() !== _this.dataToPlot[i - 1].date.getDate()) {
         var dateDiv = '<span class="tick-date">' + d3.timeFormat('%Y-%m-%d')(new Date(d)) + '</span>';
@@ -1193,7 +1201,7 @@ export class LiveChartComponent {
     //buildChartHeartSkin
     let _this = this;
     // remove first data point
-    if (this.dataToPlot[0].date.getTime() < latestDataPoint.date.getTime() - this.minutesToShow * 60000  )
+    while (this.dataToPlot[0].date.getTime() < latestDataPoint.date.getTime() - this.minutesToShow * 60000  )
       this.dataToPlot.shift();
     // add new data point
     switch (this.curIcon) {
@@ -1270,7 +1278,7 @@ export class LiveChartComponent {
 
   updateChartMuse(latestDataPoint: HeartSkinRateData | BrainSensorData | IMUSensorData) {
     latestDataPoint.date = new Date(latestDataPoint.date);
-    if (this.dataToPlot[0].date.getTime() < latestDataPoint.date.getTime() - this.minutesToShow * 60000  )
+    while (this.dataToPlot[0].date.getTime() < latestDataPoint.date.getTime() - this.minutesToShow * 60000  )
       this.dataToPlot.shift();
     // add new data point
     switch (this.curIcon) {
@@ -1395,7 +1403,9 @@ export class LiveChartComponent {
     if ((latestDataPoint as IMUSensorData).sensorID != this.imuSensor)
       return;
     latestDataPoint.date = new Date(latestDataPoint.date);
-    if (this.dataToPlot[0].date.getTime() < latestDataPoint.date.getTime() - this.minutesToShow * 60000  )
+    if (this.dataToPlot[0] == undefined)
+      return;
+    while (this.dataToPlot[0] != undefined && this.dataToPlot[0].date.getTime() < latestDataPoint.date.getTime() - this.minutesToShow * 60000)
       this.dataToPlot.shift();
     // add new data point
     switch (this.curIcon) {
