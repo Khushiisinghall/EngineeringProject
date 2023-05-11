@@ -104,6 +104,7 @@
       }
     }
   },
+  
   "defaultProject": "dashboard_KoPro",
   "cli": {
     "analytics": false
