@@ -9,8 +9,7 @@ from tkinter import ttk
 import threading
 from src.utilities.utility import *
 from src.utilities.constants import *
-global muse_status
-muse_status=""
+
 
 #create serial connection with esps
 ser=serial_connection(port_name=SERIAL_PORT,baudrate=BAUD_RATE)
@@ -45,7 +44,7 @@ def run():
         global stop_event
         # create an event object to signal the thread to stop
         stop_event = threading.Event()
-
+        print(muse_status)
         # data_logger.commander(ser,command)
         if len(userID)>0 and START_COMMAND=="1" : #and (mode_status=="batch" or mode_status=="real-time")
             start_button.config(bg="green")
@@ -87,11 +86,11 @@ def run():
     def toggle_muse():
         if muse_var.get()==1:
             print("Muse data is selected.")
-            
-            muse_status="Start"
+            global muse_status
+            muse_status="start"
         else:
             muse_var.set(0)            
-            muse_status="Stop"
+            muse_status="stop"
 
 
     # def toggle_real_time():
@@ -109,7 +108,7 @@ def run():
     window.title("Status Control")
     window.geometry("600x450")
     # Create user ID input field and save button
-    name_label = tk.Label(master=window, text="Vir-Track",font=("bold",20))
+    name_label = tk.Label(master=window, text="Vit-Track",font=("bold",20))
     user_label = tk.Label(master=window, text="User ID:")
     user_entry = tk.Entry(master=window)
     save_button = tk.Button(master=window, text="Save",command=getuser_entry)
